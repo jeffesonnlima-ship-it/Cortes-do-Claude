@@ -1,0 +1,9 @@
+# ambiente da skill
+.venv/
+__pycache__/
+*.pyc
+# arquivos de trabalho e cortes gerados
+trabalho/
+saida/
+# chaves (ElevenLabs etc.)
+.env
