@@ -27,7 +27,7 @@ import sysconfig
 import urllib.request
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-LIBS = [("faster_whisper", "faster-whisper"), ("cv2", "opencv-python"), ("numpy", "numpy"), ("PIL", "pillow")]
+LIBS = [("faster_whisper", "faster-whisper"), ("cv2", "opencv-python<5"), ("numpy", "numpy"), ("PIL", "pillow")]
 YTDLP = "yt-dlp[default,deno]"
 CUDA_WIN = [("nvidia.cublas", "nvidia-cublas-cu12"), ("nvidia.cudnn", "nvidia-cudnn-cu12>=9,<10")]
 YUNET = ("https://github.com/opencv/opencv_zoo/raw/main/models/face_detection_yunet/"
@@ -46,9 +46,17 @@ def falta(msg):
 
 def tem(mod):
     try:
-        return importlib.util.find_spec(mod) is not None
+        if importlib.util.find_spec(mod) is None:
+            return False
     except (ModuleNotFoundError, ValueError):
         return False
+    if mod == "cv2":                                      # o OpenCV 5 tirou o detector Haar que a skill usa sem o YuNet
+        try:
+            from importlib.metadata import version
+            return int(version("opencv-python").split(".")[0]) < 5
+        except Exception:
+            return True
+    return True
 
 
 def pip(pacotes):

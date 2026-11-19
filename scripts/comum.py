@@ -7,6 +7,7 @@
 import glob
 import os
 import shutil
+import subprocess
 import sys
 
 
@@ -32,6 +33,24 @@ def achar_ffmpeg():
             os.environ["PATH"] = pasta + os.pathsep + os.environ.get("PATH", "")
             return pasta
     return None
+
+
+_NVENC = None
+
+
+def tem_nvenc():
+    """True se o h264_nvenc funciona de verdade (placa NVIDIA + driver), não só se o ffmpeg foi compilado com ele.
+    O ffmpeg do winget e de muitas distros vem com o nvenc mesmo em computador sem placa NVIDIA."""
+    global _NVENC
+    if _NVENC is None:
+        try:
+            r = subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-f", "lavfi", "-i", "color=black:s=256x256:d=0.1",
+                                "-frames:v", "1", "-c:v", "h264_nvenc", "-f", "null", "-"],
+                               capture_output=True, timeout=30)
+            _NVENC = r.returncode == 0
+        except (OSError, subprocess.SubprocessError):
+            _NVENC = False
+    return _NVENC
 
 
 def preparar():

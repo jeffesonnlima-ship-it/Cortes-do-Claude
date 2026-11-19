@@ -57,6 +57,9 @@ class Detector:
             self.yn = cv2.FaceDetectorYN.create(self.modelo, "", (w, h), 0.6, 0.3, 5000)
             self.tipo = "YuNet (OpenCV)"
         else:
+            if not hasattr(cv2, "CascadeClassifier"):
+                raise SystemExit("[enquadrar] sem o modelo YuNet e este OpenCV não tem o detector Haar (OpenCV 5). "
+                                 "Rode `python instalar.py` de novo: ele baixa o YuNet e instala o OpenCV 4.")
             base = cv2.data.haarcascades
             self.haar = cv2.CascadeClassifier(base + "haarcascade_frontalface_default.xml")
             self.perfil = cv2.CascadeClassifier(base + "haarcascade_profileface.xml")

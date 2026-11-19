@@ -26,8 +26,8 @@ LARG, ALT, FPS = 1080, 1920, 30
 
 
 def enc_video():
-    r = subprocess.run(["ffmpeg", "-hide_banner", "-encoders"], capture_output=True, text=True).stdout
-    if "h264_nvenc" in r:
+    from comum import tem_nvenc
+    if tem_nvenc():
         return ["-c:v", "h264_nvenc", "-preset", "p6", "-tune", "hq", "-rc", "vbr", "-cq", "19", "-b:v", "12M",
                 "-maxrate", "20M", "-bufsize", "24M", "-profile:v", "high"]
     return ["-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high"]
