@@ -1,0 +1,256 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--or:#FF7A00;--or2:#FF9A3D;--deep:#C94A00;--dark:#5A1E00;--peach:#FFE7D1;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:540px;height:960px;overflow:hidden;background:#fff;font-family:'Inter',sans-serif}
+#root{position:absolute;inset:0;overflow:hidden}
+.layer{position:absolute;inset:0;display:none}
+.center{position:absolute;left:50%;top:50%}
+/* scene 1-2 */
+#icon{width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:30px;background:linear-gradient(145deg,#FF9A3D,#FF6A00);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:40px;letter-spacing:-1.5px;
+  box-shadow:0 18px 40px rgba(255,106,0,.45)}
+#phoneWrap{perspective:1200px}
+#phone{width:300px;height:560px;margin:-280px 0 0 -150px;border-radius:34px;background:#fff;overflow:hidden;
+  box-shadow:0 30px 80px rgba(80,20,0,.45);transform-style:preserve-3d}
+#phone .hdr{height:175px;background:linear-gradient(160deg,#FF9A3D,#FF6A00);padding:26px 24px;color:#fff}
+.avatar{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.95);position:relative;overflow:hidden}
+.avatar:before{content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:#FFB27A;left:17px;top:10px}
+.avatar:after{content:"";position:absolute;width:38px;height:30px;border-radius:50%;background:#FFB27A;left:8px;top:34px}
+.hello{font-size:22px;font-weight:700;margin-top:18px}
+.body{padding:22px 24px}
+.lbl{font-size:14px;color:#8a7a70;font-weight:600}
+.bal{font-size:28px;font-weight:800;color:#2b1a10;margin-top:4px;letter-spacing:-.5px}
+.acts{display:flex;justify-content:space-between;margin-top:26px}
+.act{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#4a3a30}
+.act .c{width:54px;height:54px;border-radius:50%;background:#FFF0E3;display:flex;align-items:center;justify-content:center}
+.banner{margin-top:26px;border-radius:18px;background:linear-gradient(120deg,#FF7A00,#FFA552);color:#fff;padding:16px 18px}
+.banner b{display:block;font-size:13px;opacity:.9;font-weight:600}
+.banner span{font-size:22px;font-weight:800}
+.row{margin-top:16px;height:14px;border-radius:7px;background:#F3ECE6}
+/* scene 3 */
+#cbText{position:absolute;left:0;right:0;top:445px;text-align:center;font-size:40px;letter-spacing:-1px}
+#cbText .a{color:#2b1a10;font-weight:500}
+#cbText .b{color:var(--or);font-weight:800;text-shadow:0 0 24px rgba(255,122,0,.55)}
+/* scene 4 */
+#stage{position:absolute;inset:0}
+.top{position:absolute;left:34px;top:120px;color:#fff}
+.top .t1{font-size:15px;opacity:.85;font-weight:600}
+.top .t2{font-size:34px;font-weight:800;margin-top:4px;letter-spacing:-.5px}
+.pill{display:inline-block;background:#fff;color:var(--or);font-weight:800;border-radius:999px;padding:12px 26px;font-size:17px;box-shadow:0 10px 30px rgba(120,40,0,.3)}
+.tabs{position:absolute;left:34px;top:300px;display:flex;gap:28px;color:#fff;font-size:15px;font-weight:700;white-space:nowrap}
+.tabs span{opacity:.6}.tabs span.on{opacity:1}
+#uline{position:absolute;top:328px;height:3px;border-radius:2px;background:#fff}
+#carousel{position:absolute;left:0;right:0;top:370px;height:300px;perspective:900px}
+.card{position:absolute;left:50%;top:0;width:160px;height:190px;margin-left:-80px;border-radius:26px;background:#fff;
+  box-shadow:0 20px 50px rgba(110,35,0,.35);padding:20px;color:var(--or);font-size:26px;font-weight:800;line-height:1.05;letter-spacing:-.5px}
+.card .ic{width:44px;height:44px;border-radius:14px;background:#FFF0E3;margin-bottom:46px;display:flex;align-items:center;justify-content:center}
+.card .btn{position:absolute;left:50%;bottom:-62px;transform:translateX(-50%);white-space:nowrap}
+.bottom{position:absolute;left:34px;right:34px;top:745px;color:#fff;border-top:1px solid rgba(255,255,255,.35);padding-top:22px}
+.bottom .t1{font-size:15px;opacity:.85;font-weight:600}
+.bottom .t2{font-size:28px;font-weight:800;margin-top:4px}
+/* scene 5 */
+#dot{position:absolute;left:50%;top:50%;height:58px;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;
+  color:var(--or);font-weight:800;font-size:23px;white-space:nowrap;overflow:hidden;box-shadow:0 0 60px rgba(255,255,255,.55),0 0 140px rgba(255,180,100,.5)}
+/* scene 7 */
+#sig{position:absolute;left:0;right:0;top:420px;text-align:center;color:#2b1a10}
+#sig .s1{font-size:46px;font-weight:200;letter-spacing:10px}
+#sig .s2{font-size:30px;font-weight:300;margin-top:-4px;letter-spacing:2px}
+#sig .s2 b{color:var(--or);font-weight:700}
+#sigLine{height:3px;background:var(--or);margin:16px auto 0;border-radius:2px}
+#disc{position:absolute;left:0;right:0;bottom:70px;text-align:center;font-size:12px;color:#a08a7a;letter-spacing:2px;text-transform:uppercase}
+#flash{position:absolute;inset:0;background:#fff;pointer-events:none}
+</style></head>
+<body><div id="root">
+  <div id="bg" class="layer" style="display:block"></div>
+
+  <!-- S1/S2: icon -> phone -->
+  <div id="L1" class="layer">
+    <div id="icon" class="center">inter</div>
+  </div>
+  <div id="L2" class="layer">
+    <div id="phoneWrap" class="layer" style="display:block">
+      <div id="phone" class="center">
+        <div class="hdr"><div class="avatar"></div><div class="hello">Olá, Ana</div></div>
+        <div class="body">
+          <div class="lbl">Saldo em conta</div>
+          <div class="bal">R$ 2.483,90</div>
+          <div class="acts">
+            <div class="act"><div class="c"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l10 10-10 10L2 12z" fill="none" stroke="#FF7A00" stroke-width="2.4"/></svg></div>Pix</div>
+            <div class="act"><div class="c"><svg width="24" height="20" viewBox="0 0 24 20"><g fill="#FF7A00"><rect x="1" y="2" width="2" height="16"/><rect x="5" y="2" width="1.4" height="16"/><rect x="8" y="2" width="3" height="16"/><rect x="13" y="2" width="1.4" height="16"/><rect x="16" y="2" width="2.4" height="16"/><rect x="20.5" y="2" width="1.6" height="16"/></g></svg></div>Pagar</div>
+            <div class="act"><div class="c"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="#FF7A00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Transferir</div>
+            <div class="act"><div class="c"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 19l6-7 4 4 8-10" fill="none" stroke="#FF7A00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Investir</div>
+          </div>
+          <div class="banner"><b>Cashback acumulado</b><span>R$ 287,40</span></div>
+          <div class="row"></div><div class="row" style="width:60%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div id="L3" class="layer"><div id="cbText"><span class="a">Cashback </span><span class="b">inter</span></div></div>
+
+  <!-- S4 -->
+  <div id="L4" class="layer"><div id="stage">
+    <div class="top"><div class="t1">Total investido</div><div class="t2">R$ 12.430,00</div><div class="pill" style="margin-top:16px">Investir</div></div>
+    <div class="tabs"><span id="tb0" class="on">Minha conta</span><span id="tb1">Cashback</span><span id="tb2">Investimentos</span></div>
+    <div id="uline"></div>
+    <div id="carousel">
+      <div class="card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l10 10-10 10L2 12z" fill="none" stroke="#FF7A00" stroke-width="2.6"/></svg></div>Pix<br>grátis<div class="pill btn">Enviar</div></div>
+      <div class="card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 19l6-7 4 4 8-10" fill="none" stroke="#FF7A00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Investir<br>fácil<div class="pill btn">Começar</div></div>
+      <div class="card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 8h14l-1.5 12h-11zM9 8a3 3 0 016 0" fill="none" stroke="#FF7A00" stroke-width="2.4" stroke-linejoin="round"/></svg></div>Shop<br>online<div class="pill btn">Comprar</div></div>
+      <div class="card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#FF7A00" stroke-width="2.4"/><path d="M12 7v10M9.5 9.5h3.8a1.8 1.8 0 010 3.6h-2.6a1.8 1.8 0 000 3.6H14.5" fill="none" stroke="#FF7A00" stroke-width="2"/></svg></div>Cash-<br>back<div class="pill btn">Ativar</div></div>
+    </div>
+    <div class="bottom"><div class="t1">Cashback este mês</div><div class="t2">+ R$ 64,90</div><div class="pill" style="margin-top:14px">Resgatar</div></div>
+  </div></div>
+
+  <!-- S5 -->
+  <div id="L5" class="layer"><div id="dot"><span id="dotTxt">Seu banco, do seu jeito.</span></div></div>
+
+  <!-- S6 -->
+  <div id="L6" class="layer"><div id="icon2" class="center" style="width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:30px;background:linear-gradient(145deg,#FF9A3D,#FF6A00);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:40px;letter-spacing:-1.5px;box-shadow:0 18px 40px rgba(255,106,0,.45)">inter</div></div>
+
+  <!-- S7 -->
+  <div id="L7" class="layer"><div id="sig"><div class="s1">CORTES</div><div class="s2">do <b>Claude</b></div><div id="sigLine"></div></div>
+    <div id="disc">Projeto conceitual · não oficial</div></div>
+
+  <div id="flash"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const p=(t,a,b)=>cl((t-a)/(b-a));
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eo=x=>1-Math.pow(1-x,3);
+const ei=x=>x*x*x;
+const back=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+const lerp=(a,b,x)=>a+(b-a)*x;
+const show=(id,on)=>{$(id).style.display=on?'block':'none'};
+function carPos(t){
+  let pos=0;
+  pos+=eio(p(t,4.05,4.45));pos+=eio(p(t,4.85,5.25));pos+=eio(p(t,5.6,5.95));
+  return pos;
+}
+function render(t){
+  const bg=$('bg');
+  ['L1','L2','L3','L4','L5','L6','L7'].forEach(l=>show(l,false));
+  $('flash').style.opacity=0;
+  // ---------- S1: icon pop (0 - 1.0)
+  if(t<1.0){
+    const k=p(t,0.72,1.0);
+    bg.style.background=`radial-gradient(circle at 50% 45%, ${k>0?'#FF8A1F':'#FFF4EA'} 0%, ${k>0?'#D04A00':'#FFD5AE'} 100%)`;
+    if(k>0){bg.style.opacity=1}
+    show('L1',true);
+    const s=t<0.45?back(p(t,0,0.45)):1+0.03*Math.sin((t-0.45)*8);
+    const ic=$('icon');
+    const rz=lerp(0,-28,eio(k)), sc=s*lerp(1,1.15,eio(k));
+    ic.style.transform=`perspective(800px) rotateZ(${rz}deg) rotateY(${lerp(0,55,eio(k))}deg) scale(${sc})`;
+    ic.style.filter=`blur(${(p(t,0,0.12)<1?(1-p(t,0,0.12))*8:0)+k*3}px)`;
+    ic.style.background=k>0.5?'#fff':'linear-gradient(145deg,#FF9A3D,#FF6A00)';
+    ic.style.color=k>0.5?'transparent':'#fff';
+    ic.style.opacity=Math.min(1,p(t,0,0.08));
+    return;
+  }
+  // ---------- S2: phone (1.0 - 2.35)
+  if(t<2.35){
+    bg.style.background='radial-gradient(circle at 50% 45%, #FF8A1F 0%, #D04A00 70%, #9A3300 100%)';
+    show('L2',true);
+    const a=eo(p(t,1.0,1.55)); const z=eio(p(t,1.6,2.0)); const out=ei(p(t,2.1,2.35));
+    const ph=$('phone');
+    const rz=lerp(-28,0,a), ry=lerp(55,0,a), sc=lerp(0.42,1,a)*lerp(1,1.85,z)*lerp(1,2.6,out);
+    const ty=lerp(0,140,z)+lerp(0,250,out);
+    ph.style.transform=`translateY(${ty}px) rotateZ(${rz}deg) rotateY(${ry}deg) scale(${sc})`;
+    ph.style.filter=`blur(${(1-p(t,1.0,1.25))*6+out*14}px)`;
+    // fade content in
+    const cont=p(t,1.35,1.7);
+    ph.querySelectorAll('.hdr > *, .body > *').forEach((e,i)=>{const q=eo(p(t,1.35+i*0.05,1.65+i*0.05));e.style.opacity=q;e.style.transform=`translateY(${(1-q)*14}px)`;});
+    ph.querySelectorAll('.act').forEach((e,i)=>{const q=back(p(t,1.75+i*0.07,2.0+i*0.07));e.style.transform=`scale(${Math.max(0,q)})`;});
+    $('flash').style.opacity=out;
+    return;
+  }
+  // ---------- S3: Cashback inter (2.35 - 3.35)
+  if(t<3.35){
+    bg.style.background='#fff';
+    show('L3',true);
+    const a=eo(p(t,2.35,2.75)), o=ei(p(t,3.05,3.35));
+    const tx=$('cbText');
+    tx.style.filter=`blur(${(1-a)*16+o*22}px)`;
+    tx.style.opacity=a*(1-o*0.6);
+    tx.style.letterSpacing=`${lerp(14,-1,a)+o*6}px`;
+    tx.style.transform=`scale(${lerp(1.25,1,a)*lerp(1,1.6,o)}) translateY(${o*-30}px)`;
+    bg.style.background=o>0?`rgb(${lerp(255,232,o)},${lerp(255,105,o)},${lerp(255,10,o)})`:'#fff';
+    return;
+  }
+  // ---------- S4: carousel (3.35 - 6.8)
+  if(t<6.8){
+    bg.style.background='linear-gradient(170deg,#FF9A3D 0%,#FF7A00 45%,#D04A00 100%)';
+    show('L4',true);
+    const st=$('stage');
+    const inn=eo(p(t,3.35,3.85));
+    const dt=1/60, v=Math.abs(carPos(t+dt)-carPos(t-dt))/(2*dt);
+    const zoom=ei(p(t,6.3,6.8));
+    st.style.transform=`translateY(${lerp(80,0,inn)+(t-3.35)*-6}px) scale(${lerp(1.35,1.05,inn)-((t-3.35)*0.012)}) rotateZ(${lerp(-6,0,inn)}deg)`;
+    st.style.filter=`blur(${(1-inn)*18}px)`;
+    st.style.opacity=Math.min(1,inn*1.5);
+    const pos=carPos(t);
+    document.querySelectorAll('.card').forEach((c,i)=>{
+      const o=(i-pos)*180; const ao=Math.abs(o);
+      let s=1-Math.min(ao,360)/360*0.22;
+      let extra='';
+      if(i===3&&zoom>0){s*=lerp(1,7,zoom);extra=` translateY(${zoom*40}px)`;}
+      c.style.transform=`translateX(${o}px) translateZ(${-ao*0.5}px) rotateY(${-o*0.09}deg) scale(${s})${extra}`;
+      c.style.filter=`blur(${Math.min(7,v*2.4)+ (ao>10?ao/180*1.2:0)}px)`;
+      c.style.zIndex=100-Math.round(ao);
+      c.style.opacity=i===3?1:1-zoom;
+    });
+    // tabs
+    const tabIdx=t<4.5?0:(t<5.95?1:2);
+    [0,1,2].forEach(i=>$('tb'+i).className=i===tabIdx?'on':'');
+    const tb=$('tb'+tabIdx);
+    $('uline').style.left=(34+tb.offsetLeft)+'px';$('uline').style.width=tb.offsetWidth+'px';
+    st.querySelectorAll('.top,.tabs,#uline,.bottom').forEach(e=>e.style.opacity=1-zoom);
+    return;
+  }
+  // ---------- S5: dot -> pill (6.8 - 7.95)  HARD CUT
+  if(t<7.95){
+    bg.style.background='radial-gradient(circle at 50% 50%, #FF8A1F 0%, #C94400 55%, #5A1E00 100%)';
+    show('L5',true);
+    const d=$('dot'), a=back(p(t,6.8,7.0)), w=eio(p(t,7.05,7.4)), o=ei(p(t,7.65,7.95));
+    const W=lerp(22,380,w), H=lerp(22,66,w);
+    d.style.width=W+'px';d.style.height=H+'px';
+    d.style.transform=`translate(-50%,-50%) perspective(700px) rotateY(${o*35}deg) rotateZ(${o*-6}deg) scale(${Math.max(0,a)*lerp(1,0.6,o)})`;
+    d.style.filter=`blur(${o*6}px)`;
+    $('dotTxt').style.opacity=p(t,7.25,7.45);
+    $('dotTxt').style.letterSpacing=lerp(4,0,eo(p(t,7.25,7.6)))+'px';
+    bg.style.filter=`brightness(${1+0.25*Math.sin(Math.min(1,p(t,6.8,7.95))*Math.PI)})`;
+    if(o>0)$('flash').style.opacity=o;
+    return;
+  }
+  bg.style.filter='none';
+  // ---------- S6: logo (7.95 - 8.65)
+  if(t<8.65){
+    bg.style.background='#fff';
+    show('L6',true);
+    const a=back(p(t,7.95,8.25)), o=ei(p(t,8.45,8.65));
+    const ic=$('icon2');
+    ic.style.transform=`scale(${Math.max(0,a)*lerp(1,0.85,o)}) rotate(${(1-p(t,7.95,8.25))*-12}deg)`;
+    ic.style.filter=`blur(${o*10}px)`;ic.style.opacity=1-o;
+    return;
+  }
+  // ---------- S7: signature (8.65 - 10)
+  {
+    const fade=eio(p(t,9.55,10));
+    bg.style.background=`radial-gradient(circle at 50% 45%, rgb(${lerp(255,255,fade)},${lerp(255,244,fade)},${lerp(255,234,fade)}) 0%, rgb(255,${lerp(255,213,fade)},${lerp(255,174,fade)}) 100%)`;
+    show('L7',true);
+    const a=eo(p(t,8.65,9.05)), o=ei(p(t,9.35,9.7));
+    const s=$('sig');
+    s.style.filter=`blur(${(1-a)*10+o*14}px)`;s.style.opacity=a*(1-o);
+    s.querySelector('.s1').style.letterSpacing=lerp(22,10,a)+'px';
+    $('sigLine').style.width=lerp(0,150,eio(p(t,8.85,9.25)))+'px';
+    $('disc').style.opacity=a*(1-o)*0.9;
+  }
+}
+window.render=render;
+</script></body></html>
