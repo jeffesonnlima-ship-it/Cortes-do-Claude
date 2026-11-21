@@ -1,0 +1,189 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,NunitoCap,82,&H00FFFFFF,&H00FFFFFF,&H00141414,&H96000000,0,0,0,0,100,100,1,0,1,6,5,5,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.68,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Hoje,
+Dialogue: 0,0:00:00.68,0:00:01.23,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}às quatro e
+Dialogue: 0,0:00:01.23,0:00:02.34,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}meia da tarde,
+Dialogue: 0,0:00:02.34,0:00:03.22,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o Flamengo pode
+Dialogue: 0,0:00:03.22,0:00:03.98,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}ser campeão
+Dialogue: 0,0:00:03.98,0:00:04.88,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}brasileiro…
+Dialogue: 0,0:00:04.88,0:00:05.72,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}dentro da casa
+Dialogue: 0,0:00:05.72,0:00:06.80,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}do Palmeiras.
+Dialogue: 0,0:00:06.80,0:00:08.30,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Basta um empate.
+Dialogue: 0,0:00:08.30,0:00:08.54,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Festa
+Dialogue: 0,0:00:08.54,0:00:09.80,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}rubro-negra ou o
+Dialogue: 0,0:00:09.80,0:00:10.72,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Palmeiras adia o
+Dialogue: 0,0:00:10.72,0:00:11.48,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}grito?
+Dialogue: 0,0:00:11.48,0:00:12.10,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Fica até o
+Dialogue: 0,0:00:12.10,0:00:12.66,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}final,
+Dialogue: 0,0:00:12.66,0:00:13.30,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}porque o último
+Dialogue: 0,0:00:13.30,0:00:13.96,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}encontro entre
+Dialogue: 0,0:00:13.96,0:00:14.84,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}os dois terminou
+Dialogue: 0,0:00:14.84,0:00:15.28,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}de um jeito
+Dialogue: 0,0:00:15.28,0:00:16.24,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}que ninguém no
+Dialogue: 0,0:00:16.24,0:00:16.66,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Flamengo
+Dialogue: 0,0:00:16.66,0:00:17.72,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}esqueceu.
+Dialogue: 0,0:00:17.74,0:00:18.54,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Faltam três
+Dialogue: 0,0:00:18.54,0:00:19.50,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}rodadas.
+Dialogue: 0,0:00:19.50,0:00:20.42,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}O Flamengo chega
+Dialogue: 0,0:00:20.42,0:00:20.66,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}líder,
+Dialogue: 0,0:00:20.66,0:00:22.70,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}com 79 pontos.
+Dialogue: 0,0:00:22.70,0:00:23.36,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}O Palmeiras é
+Dialogue: 0,0:00:23.36,0:00:24.06,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o segundo,
+Dialogue: 0,0:00:24.06,0:00:25.26,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}com 73.
+Dialogue: 0,0:00:25.30,0:00:25.92,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Seis de
+Dialogue: 0,0:00:25.92,0:00:26.30,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}diferença.
+Dialogue: 0,0:00:26.30,0:00:27.40,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Pra continuar
+Dialogue: 0,0:00:27.40,0:00:28.14,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}vivo,
+Dialogue: 0,0:00:28.14,0:00:28.64,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o Palmeiras
+Dialogue: 0,0:00:28.64,0:00:30.10,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}precisa ganhar.
+Dialogue: 0,0:00:30.10,0:00:30.70,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Qualquer outra
+Dialogue: 0,0:00:30.70,0:00:31.12,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}coisa,
+Dialogue: 0,0:00:31.12,0:00:31.90,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}e a taça
+Dialogue: 0,0:00:31.90,0:00:32.90,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}vai pro Rio.
+Dialogue: 0,0:00:32.90,0:00:33.62,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}E isso não
+Dialogue: 0,0:00:33.62,0:00:34.32,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}é só mais
+Dialogue: 0,0:00:34.32,0:00:35.14,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}um jogo.
+Dialogue: 0,0:00:35.14,0:00:35.72,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}É o capítulo
+Dialogue: 0,0:00:35.72,0:00:36.76,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}mais recente da
+Dialogue: 0,0:00:36.76,0:00:37.82,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}maior rivalidade
+Dialogue: 0,0:00:37.82,0:00:38.44,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}do futebol
+Dialogue: 0,0:00:38.44,0:00:39.32,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}brasileiro desta
+Dialogue: 0,0:00:39.32,0:00:40.36,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}década.
+Dialogue: 0,0:00:40.36,0:00:41.64,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Em 2021,
+Dialogue: 0,0:00:41.64,0:00:42.10,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}final da
+Dialogue: 0,0:00:42.10,0:00:42.70,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Libertadores,
+Dialogue: 0,0:00:42.70,0:00:44.04,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}em Montevidéu.
+Dialogue: 0,0:00:44.04,0:00:45.04,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Prorrogação,
+Dialogue: 0,0:00:45.04,0:00:45.78,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}erro na saída
+Dialogue: 0,0:00:45.78,0:00:46.30,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}de bola do
+Dialogue: 0,0:00:46.30,0:00:47.12,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Flamengo,
+Dialogue: 0,0:00:47.12,0:00:47.44,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}gol do
+Dialogue: 0,0:00:47.44,0:00:48.28,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Deyverson.
+Dialogue: 0,0:00:48.28,0:00:48.84,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Palmeiras
+Dialogue: 0,0:00:48.84,0:00:49.92,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}campeão.
+Dialogue: 0,0:00:49.92,0:00:51.40,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Em 2025,
+Dialogue: 0,0:00:51.48,0:00:52.32,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}nova final,
+Dialogue: 0,0:00:52.32,0:00:53.14,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}agora em Lima.
+Dialogue: 0,0:00:53.14,0:00:54.28,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Gol de cabeça
+Dialogue: 0,0:00:54.28,0:00:55.54,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}do Léo Ortiz.
+Dialogue: 0,0:00:55.54,0:00:56.50,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}1 a 0,
+Dialogue: 0,0:00:56.50,0:00:57.06,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}e dessa vez
+Dialogue: 0,0:00:57.06,0:00:57.92,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}quem levantou a
+Dialogue: 0,0:00:57.92,0:00:58.66,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}taça foi o
+Dialogue: 0,0:00:58.66,0:00:59.38,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Flamengo.
+Dialogue: 0,0:00:59.38,0:01:00.18,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Uma pra cada
+Dialogue: 0,0:01:00.18,0:01:00.94,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}lado.
+Dialogue: 0,0:01:00.94,0:01:01.44,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Só que em
+Dialogue: 0,0:01:01.44,0:01:03.10,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}2026 o roteiro
+Dialogue: 0,0:01:03.10,0:01:03.90,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}deu mais uma
+Dialogue: 0,0:01:03.90,0:01:04.72,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}volta.
+Dialogue: 0,0:01:04.72,0:01:05.40,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Em maio,
+Dialogue: 0,0:01:05.40,0:01:06.34,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}no Maracanã,
+Dialogue: 0,0:01:06.34,0:01:07.10,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o Palmeiras foi
+Dialogue: 0,0:01:07.10,0:01:07.68,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}até o Rio
+Dialogue: 0,0:01:07.68,0:01:08.54,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}e fez três
+Dialogue: 0,0:01:08.54,0:01:09.38,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}a zero.
+Dialogue: 0,0:01:09.38,0:01:10.12,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Era esse o
+Dialogue: 0,0:01:10.12,0:01:10.66,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}jogo que o
+Dialogue: 0,0:01:10.66,0:01:11.26,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Flamengo não
+Dialogue: 0,0:01:11.26,0:01:12.24,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}esquecia.
+Dialogue: 0,0:01:12.24,0:01:13.12,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Desde então,
+Dialogue: 0,0:01:13.12,0:01:13.54,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o Flamengo
+Dialogue: 0,0:01:13.54,0:01:14.70,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}correu atrás e
+Dialogue: 0,0:01:14.70,0:01:16.02,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}virou a tabela.
+Dialogue: 0,0:01:16.02,0:01:16.88,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}No apito,
+Dialogue: 0,0:01:16.88,0:01:17.48,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}hoje,
+Dialogue: 0,0:01:17.48,0:01:18.10,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o pernambucano
+Dialogue: 0,0:01:18.10,0:01:18.96,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Rodrigo José
+Dialogue: 0,0:01:18.96,0:01:19.86,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Pereira de Lima.
+Dialogue: 0,0:01:19.86,0:01:20.84,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}No VAR,
+Dialogue: 0,0:01:20.84,0:01:21.78,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Charly Wendy
+Dialogue: 0,0:01:21.78,0:01:22.80,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Straub Deretti.
+Dialogue: 0,0:01:22.80,0:01:23.52,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}E o palco
+Dialogue: 0,0:01:23.52,0:01:24.20,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}é o Nubank
+Dialogue: 0,0:01:24.20,0:01:24.92,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Parque,
+Dialogue: 0,0:01:24.92,0:01:25.42,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o antigo
+Dialogue: 0,0:01:25.42,0:01:26.48,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Allianz.
+Dialogue: 0,0:01:26.48,0:01:27.06,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Quem acha que
+Dialogue: 0,0:01:27.06,0:01:27.64,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o Flamengo é
+Dialogue: 0,0:01:27.64,0:01:28.78,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}campeão hoje tem
+Dialogue: 0,0:01:28.78,0:01:29.58,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}argumento.
+Dialogue: 0,0:01:29.58,0:01:30.52,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Seis pontos de
+Dialogue: 0,0:01:30.52,0:01:31.24,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}vantagem.
+Dialogue: 0,0:01:31.24,0:01:32.00,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Só precisa
+Dialogue: 0,0:01:32.00,0:01:32.80,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}empatar.
+Dialogue: 0,0:01:32.80,0:01:33.16,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}E foi o
+Dialogue: 0,0:01:33.16,0:01:33.78,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Flamengo que
+Dialogue: 0,0:01:33.78,0:01:34.46,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}ganhou a última
+Dialogue: 0,0:01:34.46,0:01:35.24,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}final entre os
+Dialogue: 0,0:01:35.24,0:01:35.96,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}dois.
+Dialogue: 0,0:01:35.96,0:01:36.58,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Quem acha que
+Dialogue: 0,0:01:36.58,0:01:37.52,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o Palmeiras adia
+Dialogue: 0,0:01:37.52,0:01:38.90,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}também tem.
+Dialogue: 0,0:01:38.90,0:01:39.82,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Joga em casa,
+Dialogue: 0,0:01:39.82,0:01:40.88,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}com a torcida.
+Dialogue: 0,0:01:40.88,0:01:41.32,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}E o último
+Dialogue: 0,0:01:41.32,0:01:42.14,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}confronto foi
+Dialogue: 0,0:01:42.14,0:01:42.96,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}três a zero
+Dialogue: 0,0:01:42.96,0:01:43.96,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}pro Palmeiras…
+Dialogue: 0,0:01:43.96,0:01:45.06,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}no Maracanã.
+Dialogue: 0,0:01:45.06,0:01:45.48,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}E tem um
+Dialogue: 0,0:01:45.48,0:01:46.30,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}detalhe.
+Dialogue: 0,0:01:46.30,0:01:46.86,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Mesmo que o
+Dialogue: 0,0:01:46.86,0:01:47.66,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Palmeiras vença
+Dialogue: 0,0:01:47.66,0:01:48.04,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}hoje,
+Dialogue: 0,0:01:48.04,0:01:49.06,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o título não
+Dialogue: 0,0:01:49.06,0:01:49.64,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}vai pra São
+Dialogue: 0,0:01:49.64,0:01:50.20,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Paulo.
+Dialogue: 0,0:01:50.20,0:01:50.84,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Só fica pra
+Dialogue: 0,0:01:50.84,0:01:51.64,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}depois.
+Dialogue: 0,0:01:51.64,0:01:52.48,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}A diferença cai
+Dialogue: 0,0:01:52.48,0:01:53.74,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}pra três pontos,
+Dialogue: 0,0:01:53.74,0:01:54.32,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}e o Flamengo
+Dialogue: 0,0:01:54.32,0:01:55.26,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}ainda teria duas
+Dialogue: 0,0:01:55.26,0:01:55.98,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}rodadas pra
+Dialogue: 0,0:01:55.98,0:01:57.08,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}fechar a conta.
+Dialogue: 0,0:01:57.08,0:01:57.86,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Ou seja:
+Dialogue: 0,0:01:57.86,0:01:58.58,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o Palmeiras não
+Dialogue: 0,0:01:58.58,0:01:59.38,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}joga pra ser
+Dialogue: 0,0:01:59.38,0:02:00.46,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}campeão hoje.
+Dialogue: 0,0:02:00.46,0:02:01.30,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Joga pra não
+Dialogue: 0,0:02:01.30,0:02:02.02,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}ver o rival
+Dialogue: 0,0:02:02.02,0:02:02.86,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}comemorando no
+Dialogue: 0,0:02:02.86,0:02:03.90,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}seu gramado.
+Dialogue: 0,0:02:03.90,0:02:05.04,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Pra uma torcida,
+Dialogue: 0,0:02:05.04,0:02:05.48,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}é a chance
+Dialogue: 0,0:02:05.48,0:02:06.12,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}de fazer a
+Dialogue: 0,0:02:06.12,0:02:06.98,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}festa na casa
+Dialogue: 0,0:02:06.98,0:02:08.06,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}do adversário.
+Dialogue: 0,0:02:08.06,0:02:08.84,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Pra outra,
+Dialogue: 0,0:02:08.84,0:02:09.26,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}é a chance
+Dialogue: 0,0:02:09.26,0:02:10.18,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}de estragar a
+Dialogue: 0,0:02:10.18,0:02:10.96,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}festa mais
+Dialogue: 0,0:02:10.96,0:02:12.30,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}esperada do ano.
+Dialogue: 0,0:02:12.30,0:02:12.90,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Quatro e meia
+Dialogue: 0,0:02:12.90,0:02:13.72,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}da tarde.
+Dialogue: 0,0:02:13.72,0:02:15.06,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Noventa minutos.
+Dialogue: 0,0:02:15.06,0:02:16.32,Cap,,0,0,0,,{\pos(540,1420)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Seis pontos.
+Dialogue: 0,0:02:16.32,0:02:16.84,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}E pior que
+Dialogue: 0,0:02:16.84,0:02:17.18,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}é verdade.
+Dialogue: 0,0:02:17.18,0:02:18.54,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}E agora,
+Dialogue: 0,0:02:18.54,0:02:19.12,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}o palpite é
+Dialogue: 0,0:02:19.12,0:02:19.68,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}seu.
+Dialogue: 0,0:02:19.68,0:02:20.60,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Flamengo campeão
+Dialogue: 0,0:02:20.60,0:02:20.92,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}hoje,
+Dialogue: 0,0:02:20.92,0:02:21.86,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}ou o Palmeiras
+Dialogue: 0,0:02:21.86,0:02:23.10,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}adia a festa?
+Dialogue: 0,0:02:23.10,0:02:24.00,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}Comenta aí e
+Dialogue: 0,0:02:24.00,0:02:24.68,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}se inscreve pra
+Dialogue: 0,0:02:24.68,0:02:25.76,Cap,,0,0,0,,{\pos(540,1745)\fscx70\fscy70\t(0,90,\fscx106\fscy106)\t(90,160,\fscx100\fscy100)}ver a próxima.
