@@ -1,0 +1,548 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<script src="timeline.js"></script>
+<style>
+:root{--g950:#061A13;--g900:#0B2E22;--g800:#0E3B2C;--g700:#145239;--g600:#1B6847;--g500:#2A8A5E;--mint:#8EE6B0;--cream:#F4F0E4;--mute:#8FA89B}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:540px;height:960px;overflow:hidden;background:var(--g900);font-family:'Inter',sans-serif;color:var(--cream)}
+#root{position:absolute;inset:0;overflow:hidden;background:var(--g900)}
+.scene{position:absolute;inset:0;display:none;overflow:hidden}
+.cam{position:absolute;inset:0;transform-origin:50% 45%}
+.abs{position:absolute}
+.bgGrid{position:absolute;inset:-200px;background-image:linear-gradient(rgba(142,230,176,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(142,230,176,.06) 1px,transparent 1px);background-size:44px 44px}
+.vign{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 35%,rgba(3,15,10,.75) 100%);pointer-events:none}
+.head{position:absolute;left:36px;right:36px;font-family:'Inter Display','Inter';font-weight:800;letter-spacing:-1.2px;line-height:1.04}
+.head span{display:inline-block;margin-right:.24em}
+.tag{position:absolute;left:36px;top:96px;font-size:14px;font-weight:700;letter-spacing:3px;color:var(--mint);text-transform:uppercase}
+.tag b{display:inline-block;background:var(--mint);color:var(--g900);border-radius:6px;padding:2px 7px;margin-right:8px;letter-spacing:0}
+.card{position:absolute;border-radius:22px;background:rgba(244,240,228,.06);border:1px solid rgba(244,240,228,.10);backdrop-filter:blur(2px)}
+.pill{position:absolute;white-space:nowrap;border-radius:999px;padding:11px 20px;font-weight:800;font-size:17px;background:var(--cream);color:var(--g800);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.pill.m{background:var(--mint);color:var(--g900)}
+.phone{position:absolute;border-radius:34px;background:var(--cream);overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 6px #0a2219}
+/* captions */
+#cap{position:absolute;left:30px;right:30px;top:742px;text-align:center;font-family:'Inter Display','Inter';font-weight:800;font-size:31px;letter-spacing:-.5px;line-height:1.15;text-shadow:0 3px 14px rgba(0,0,0,.55)}
+#cap span{display:inline-block;margin:0 .13em;padding:0 .12em;border-radius:8px}
+#cap span.on{color:var(--g900);background:var(--mint);text-shadow:none}
+#sweep,#sweep2{position:absolute;inset:0;pointer-events:none}
+#sweep{background:var(--mint)}#sweep2{background:var(--cream)}
+#flash{position:absolute;inset:0;background:var(--cream);opacity:0;pointer-events:none}
+#grain{position:absolute;inset:0;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+.logoBox{border-radius:30%;background:linear-gradient(150deg,var(--g600),var(--g800));display:flex;align-items:center;justify-content:center;box-shadow:0 20px 50px rgba(0,0,0,.45),inset 0 0 0 2px rgba(142,230,176,.25)}
+.word{font-family:'Inter Display','Inter';font-weight:800;letter-spacing:-1.5px}
+.post{border-radius:6px}
+</style></head>
+<body><div id="root">
+
+<!-- reusable symbols -->
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <g id="store">
+   <rect x="18" y="52" width="84" height="56" rx="6" fill="#F4F0E4"/>
+   <path d="M10 30 L22 12 H98 L110 30 Z" fill="#8EE6B0"/>
+   <path d="M10 30 h20 a10 10 0 0 1 -20 0 Z M30 30 h20 a10 10 0 0 1 -20 0Z M50 30 h20 a10 10 0 0 1 -20 0Z M70 30 h20 a10 10 0 0 1 -20 0Z M90 30 h20 a10 10 0 0 1 -20 0Z" fill="#F4F0E4"/>
+   <path d="M30 30 h20 a10 10 0 0 1 -20 0Z M70 30 h20 a10 10 0 0 1 -20 0Z" fill="#2A8A5E"/>
+   <rect x="28" y="64" width="26" height="44" rx="3" fill="#145239"/>
+   <rect x="62" y="64" width="30" height="22" rx="3" fill="#8EE6B0"/>
+  </g>
+  <g id="lever">
+   <path d="M50 58 L66 84 H34 Z" fill="#F4F0E4"/>
+   <rect x="14" y="50" width="72" height="9" rx="4.5" fill="#F4F0E4" transform="rotate(-24 50 54)"/>
+   <path d="M76 22 L92 24 L84 38 Z" fill="#8EE6B0"/>
+   <circle cx="22" cy="72" r="7" fill="#8EE6B0"/>
+  </g>
+ </defs>
+</svg>
+
+<!-- ===== A: hook ===== -->
+<div class="scene" id="A"><div class="cam">
+  <div class="bgGrid" style="opacity:.5"></div>
+  <div id="aSpot" class="abs" style="left:-100px;right:-100px;top:-200px;height:1100px;background:radial-gradient(ellipse at 50% 62%,rgba(142,230,176,.22),transparent 45%)"></div>
+  <div id="aH1" class="head" style="top:210px;font-size:54px"></div>
+  <div id="aH2" class="head" style="top:210px;font-size:54px"></div>
+  <svg id="aStore" class="abs" viewBox="0 0 120 120" style="left:190px;top:440px;width:160px;height:160px"><use href="#store"/></svg>
+  <svg id="aEye" class="abs" viewBox="0 0 100 60" style="left:220px;top:300px;width:100px;height:60px;display:none">
+    <path id="aLid" d="M5 30 Q50 -5 95 30 Q50 65 5 30Z" fill="none" stroke="#8EE6B0" stroke-width="5"/>
+    <circle id="aPupil" cx="50" cy="30" r="12" fill="#8EE6B0"/>
+    <line id="aSlash" x1="12" y1="54" x2="88" y2="6" stroke="#F4F0E4" stroke-width="6" stroke-linecap="round"/>
+  </svg>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== B: posta e nada ===== -->
+<div class="scene" id="B"><div class="cam">
+  <div class="bgGrid" style="opacity:.35"></div>
+  <div id="bPhone" class="phone" style="left:140px;top:150px;width:260px;height:500px">
+    <div style="height:56px;display:flex;align-items:center;padding:0 18px;gap:10px;border-bottom:1px solid #e2ddd0">
+      <div style="width:30px;height:30px;border-radius:50%;background:#cfc9b8"></div>
+      <div style="font-weight:700;color:#333;font-size:14px">seu.negocio</div>
+    </div>
+    <div id="bPost" style="height:250px;margin:14px;border-radius:14px;background:linear-gradient(135deg,#d9d3c3,#c7c0ad);position:relative;overflow:hidden">
+      <svg viewBox="0 0 120 120" style="position:absolute;left:65px;top:55px;width:110px;height:110px;opacity:.55"><use href="#store"/></svg>
+    </div>
+    <div style="padding:0 18px;display:flex;align-items:center;gap:10px;color:#555;font-weight:700;font-size:15px">
+      <svg width="24" height="22" viewBox="0 0 24 22"><path d="M12 20 C-6 8 4 -4 12 5 C20 -4 30 8 12 20Z" fill="none" stroke="#777" stroke-width="2"/></svg>
+      <span id="bLikes">0 curtidas</span>
+    </div>
+    <div id="bBtn" style="position:absolute;left:18px;right:18px;bottom:22px;height:50px;border-radius:14px;background:#145239;color:#F4F0E4;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:16px">Publicar</div>
+    <div id="bRipple" style="position:absolute;left:130px;bottom:47px;width:10px;height:10px;margin:-5px;border-radius:50%;background:rgba(142,230,176,.7)"></div>
+  </div>
+  <div id="bZero" class="abs word" style="left:0;right:0;top:120px;text-align:center;font-size:120px;color:rgba(244,240,228,.08)">0</div>
+  <div id="bDots" class="abs" style="left:0;right:0;top:668px;text-align:center;font-size:40px;font-weight:800;color:var(--mute);letter-spacing:8px">...</div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== C: problema ===== -->
+<div class="scene" id="C"><div class="cam" id="cCam">
+  <div class="bgGrid" style="opacity:.25"></div>
+  <div id="c1" class="card" style="left:40px;top:120px;width:460px;height:190px;padding:20px">
+    <div style="display:flex;gap:14px;align-items:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:#3b5148"></div>
+      <div><div style="font-weight:800;font-size:18px">seu.negocio</div><div style="color:var(--mute);font-size:14px;margin-top:3px"><b id="cFol" style="color:var(--cream)">312</b> seguidores · última postagem há 23 dias</div></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:18px">
+      <div class="post" style="flex:1;height:70px;background:#2c3f37"></div><div class="post" style="flex:1;height:70px;background:#2c3f37"></div><div class="post" style="flex:1;height:70px;background:#2c3f37"></div><div class="post" style="flex:1;height:70px;background:#24352e"></div><div class="post" style="flex:1;height:70px;background:#24352e"></div>
+    </div>
+    <div class="pill" style="right:18px;top:18px;padding:6px 12px;font-size:13px;background:#3b5148;color:var(--cream);box-shadow:none">PARADO</div>
+  </div>
+  <div id="c2" class="card" style="left:40px;top:336px;width:460px;height:180px;padding:20px">
+    <div style="color:var(--mute);font-size:14px;font-weight:700;letter-spacing:1px">VENDAS · ÚLTIMOS 30 DIAS</div>
+    <div class="word" style="font-size:36px;margin-top:4px">3 <span style="font-size:16px;color:var(--mute);letter-spacing:0;font-weight:600">pedidos</span></div>
+    <svg class="abs" style="left:20px;top:100px" width="420" height="64" viewBox="0 0 420 64"><path id="cLine" d="M0 34 L60 30 L120 36 L180 33 L240 40 L300 38 L360 44 L420 46" fill="none" stroke="#8FA89B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div id="c3" class="card" style="left:40px;top:542px;width:460px;height:170px;padding:20px">
+    <div style="color:var(--mute);font-size:14px;font-weight:700;letter-spacing:1px">CORRIDA PELO CLIENTE</div>
+    <div class="abs" style="left:20px;right:20px;top:66px;height:4px;border-radius:2px;background:#24352e"></div>
+    <div class="abs" style="left:20px;right:20px;top:126px;height:4px;border-radius:2px;background:#24352e"></div>
+    <div id="cMe" class="abs" style="left:20px;top:56px;display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border-radius:50%;background:#8FA89B"></div><span style="font-weight:700;font-size:14px;color:var(--mute)">Você</span></div>
+    <div id="cThem" class="abs" style="left:20px;top:116px;display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border-radius:50%;background:#F4F0E4"></div><span style="font-weight:700;font-size:14px">Concorrente</span></div>
+  </div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== D: alavanca + logo ===== -->
+<div class="scene" id="D"><div class="cam" id="dCam">
+  <div id="dBg" class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 50%,#145239,#061A13 75%)"></div>
+  <div class="bgGrid" id="dGrid" style="opacity:.6"></div>
+  <div id="dLeverWrap" class="abs" style="left:0;top:0;width:540px;height:960px">
+    <div id="dFul" class="abs" style="left:240px;top:600px;width:0;height:0;border-left:30px solid transparent;border-right:30px solid transparent;border-bottom:52px solid var(--cream)"></div>
+    <div id="dBar" class="abs" style="left:70px;top:592px;width:400px;height:12px;border-radius:6px;background:var(--cream);transform-origin:200px 6px">
+      <svg id="dStore" class="abs" viewBox="0 0 120 120" style="left:300px;top:-98px;width:100px;height:100px;transform-origin:50px 100px"><use href="#store"/></svg>
+    </div>
+    <div id="dWeight" class="abs logoBox" style="left:76px;top:0;width:76px;height:76px;border-radius:20px;background:var(--mint)"><span class="word" style="color:var(--g900);font-size:40px">A</span></div>
+  </div>
+  <div id="dLogo" class="abs" style="left:0;right:0;top:300px;text-align:center">
+    <div id="dIcon" class="logoBox" style="width:150px;height:150px;margin:0 auto"><svg viewBox="0 0 100 100" width="112" height="112"><use href="#lever"/></svg></div>
+    <div id="dWord" class="word" style="font-size:66px;margin-top:26px;letter-spacing:-2.5px"></div>
+    <div id="dTag" style="font-size:15px;font-weight:600;letter-spacing:3px;color:var(--mint);margin-top:10px;text-transform:uppercase">marketing · identidade · estratégia</div>
+  </div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== E: o que fazemos ===== -->
+<div class="scene" id="E"><div class="cam" id="eCam">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 55%,#145239,#0B2E22 70%)"></div>
+  <div class="bgGrid" style="opacity:.4"></div>
+  <div id="eBars" class="abs" style="left:70px;right:70px;top:300px;height:340px;display:flex;align-items:flex-end;gap:16px">
+    <div style="flex:1;border-radius:10px 10px 4px 4px;background:rgba(142,230,176,.10)"></div><div style="flex:1;border-radius:10px 10px 4px 4px;background:rgba(142,230,176,.13)"></div><div style="flex:1;border-radius:10px 10px 4px 4px;background:rgba(142,230,176,.16)"></div><div style="flex:1;border-radius:10px 10px 4px 4px;background:rgba(142,230,176,.2)"></div><div style="flex:1;border-radius:10px 10px 4px 4px;background:rgba(142,230,176,.26)"></div>
+  </div>
+  <svg class="abs" style="left:0;top:0" width="540" height="960"><g stroke="#8EE6B0" stroke-width="2" stroke-dasharray="5 7" fill="none" opacity=".6">
+    <line id="eL1" x1="270" y1="470" x2="150" y2="300"/><line id="eL2" x1="270" y1="470" x2="400" y2="400"/><line id="eL3" x1="270" y1="470" x2="170" y2="630"/></g></svg>
+  <div id="eHub" class="abs" style="left:190px;top:390px;width:160px;height:160px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 16px rgba(142,230,176,.15),0 0 80px rgba(142,230,176,.4)">
+    <svg viewBox="0 0 120 120" style="position:absolute;left:25px;top:18px;width:110px;height:110px"><use href="#store"/></svg>
+  </div>
+  <div id="eP1" class="pill" style="left:60px;top:276px">Marketing</div>
+  <div id="eP2" class="pill m" style="left:300px;top:376px">Identidade visual</div>
+  <div id="eP3" class="pill" style="left:80px;top:606px">Estratégia</div>
+  <div id="eArrow" class="abs" style="left:370px;top:180px;width:110px;height:110px">
+    <svg viewBox="0 0 100 100" width="110" height="110"><path id="eArr" d="M10 90 L45 55 L60 70 L92 20" fill="none" stroke="#F4F0E4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path id="eArrHead" d="M72 18 L96 14 L92 38Z" fill="#F4F0E4"/></svg>
+  </div>
+  <div class="tag" id="eTag">Para pequenos negócios</div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== F: identidade visual ===== -->
+<div class="scene" id="F"><div class="cam" id="fCam">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 50%,#145239,#0B2E22 75%)"></div>
+  <div class="tag"><b>01</b>Identidade visual</div>
+  <div class="abs" style="left:0;top:0;width:540px;height:960px;perspective:1100px">
+    <div id="fBoard" class="abs" style="left:80px;top:170px;width:380px;height:520px;border-radius:26px;background:var(--cream);transform-style:preserve-3d;box-shadow:0 40px 80px rgba(0,0,0,.45);padding:22px;color:var(--g800)">
+      <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:#7b8c83">BRANDBOOK · SUA MARCA</div>
+      <div id="fLogo" class="abs" style="left:22px;top:52px;width:336px;height:150px;border-radius:18px;background:var(--g800);display:flex;align-items:center;justify-content:center;gap:14px">
+        <div style="width:58px;height:58px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 120 120" width="44" height="44"><use href="#store"/></svg></div>
+        <div class="word" style="color:var(--cream);font-size:34px">sua<span style="color:var(--mint)">marca</span></div>
+      </div>
+      <div class="abs" style="left:22px;top:224px;font-size:12px;font-weight:800;letter-spacing:2px;color:#7b8c83">CORES</div>
+      <div id="fSw" class="abs" style="left:22px;top:248px;display:flex;gap:12px">
+        <div style="width:56px;height:56px;border-radius:50%;background:#0B2E22"></div><div style="width:56px;height:56px;border-radius:50%;background:#145239"></div><div style="width:56px;height:56px;border-radius:50%;background:#2A8A5E"></div><div style="width:56px;height:56px;border-radius:50%;background:#8EE6B0"></div><div style="width:56px;height:56px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #ddd"></div>
+      </div>
+      <div class="abs" style="left:22px;top:330px;font-size:12px;font-weight:800;letter-spacing:2px;color:#7b8c83">TIPOGRAFIA</div>
+      <div id="fType" class="abs" style="left:22px;top:350px;width:336px;height:148px;border-radius:18px;background:#e9e4d5;display:flex;align-items:center;gap:20px;padding:0 22px">
+        <div class="word" style="font-size:88px;color:var(--g800);letter-spacing:-4px">Aa</div>
+        <div style="font-size:14px;line-height:1.5;color:#4d5d55"><b style="font-size:18px;color:var(--g800)">Inter Display</b><br>Títulos marcantes<br>Leitura limpa</div>
+      </div>
+      <div id="fSeal" class="abs" style="right:-30px;top:-34px;width:112px;height:112px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:13px;letter-spacing:1px;color:var(--g900);box-shadow:0 14px 30px rgba(0,0,0,.35);transform:translateZ(60px)">MARCA<br>LEMBRADA</div>
+    </div>
+  </div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== G: estratégia ===== -->
+<div class="scene" id="G"><div class="cam" id="gCam">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 40% 60%,#145239,#0B2E22 75%)"></div>
+  <div class="bgGrid" style="opacity:.5"></div>
+  <div class="tag"><b>02</b>Estratégia</div>
+  <svg class="abs" style="left:0;top:0" width="540" height="960">
+    <path id="gPath" d="M70 680 C 180 680, 140 560, 250 540 S 420 520, 400 420 S 230 330, 330 240 S 450 190, 470 170" fill="none" stroke="#8EE6B0" stroke-width="6" stroke-linecap="round"/>
+  </svg>
+  <div id="gN0" class="abs" style="left:46px;top:656px"><div style="width:48px;height:48px;border-radius:50%;background:var(--cream);box-shadow:0 0 0 8px rgba(244,240,228,.15)"></div><div style="font-weight:800;font-size:16px;margin-top:10px;margin-left:-6px">Diagnóstico</div></div>
+  <div id="gN1" class="abs" style="left:226px;top:516px"><div style="display:flex"><div style="width:40px;height:40px;border-radius:50%;background:#F4F0E4;border:3px solid #0B2E22"></div><div style="width:40px;height:40px;border-radius:50%;background:#8EE6B0;border:3px solid #0B2E22;margin-left:-12px"></div><div style="width:40px;height:40px;border-radius:50%;background:#2A8A5E;border:3px solid #0B2E22;margin-left:-12px"></div></div><div class="pill" style="position:relative;display:inline-block;margin-top:10px;padding:8px 14px;font-size:15px">Seu público</div></div>
+  <div id="gN2" class="abs" style="left:350px;top:360px"><svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="50" fill="#F4F0E4"/><circle cx="55" cy="55" r="36" fill="#145239"/><circle cx="55" cy="55" r="22" fill="#F4F0E4"/><circle cx="55" cy="55" r="9" fill="#8EE6B0"/></svg>
+    <svg id="gDart" class="abs" style="left:40px;top:-40px" width="80" height="80" viewBox="0 0 80 80"><line x1="15" y1="65" x2="72" y2="8" stroke="#8EE6B0" stroke-width="5" stroke-linecap="round"/><path d="M60 6 L76 4 L74 20Z" fill="#8EE6B0"/></svg>
+    <div class="pill m" style="position:relative;display:inline-block;margin-top:6px;margin-left:-6px;padding:8px 14px;font-size:15px">Objetivos</div></div>
+  <div id="gN3" class="abs logoBox" style="left:438px;top:136px;width:66px;height:66px;border-radius:20px"><svg viewBox="0 0 100 100" width="50" height="50"><use href="#lever"/></svg></div>
+  <div id="gPlan" class="pill" style="left:270px;top:110px;padding:8px 14px;font-size:15px">Plano de ação</div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== H: perfil ===== -->
+<div class="scene" id="H"><div class="cam" id="hCam">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 45%,#1B6847,#0B2E22 70%)"></div>
+  <div class="tag"><b>03</b>Desenvolvimento de perfil</div>
+  <div class="abs" style="left:0;top:0;width:540px;height:960px;perspective:1000px">
+  <div id="hPhone" class="phone" style="left:135px;top:150px;width:270px;height:520px">
+    <div style="padding:18px 16px 10px;display:flex;align-items:center;gap:14px;color:#1d2a24">
+      <div style="width:64px;height:64px;border-radius:50%;background:var(--g800);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #8EE6B0"><svg viewBox="0 0 120 120" width="46" height="46"><use href="#store"/></svg></div>
+      <div style="display:flex;gap:14px;text-align:center;font-size:11px;color:#55635c">
+        <div><b style="display:block;font-size:16px;color:#1d2a24">48</b>posts</div>
+        <div><b id="hFol" style="display:block;font-size:16px;color:#1d2a24">312</b>seguidores</div>
+        <div><b style="display:block;font-size:16px;color:#1d2a24">180</b>seguindo</div>
+      </div>
+    </div>
+    <div style="padding:0 16px;font-size:13px;color:#1d2a24;font-weight:800">Seu Negócio <span style="font-weight:500;color:#55635c">· Loja local</span></div>
+    <div style="margin:10px 16px;height:32px;border-radius:8px;background:var(--g800);color:var(--cream);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center">Fale conosco</div>
+    <div id="hGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:0 3px"></div>
+  </div>
+  </div>
+  <div id="hHearts" class="abs" style="inset:0"></div>
+  <div id="hC1" class="pill" style="left:22px;top:250px">atrai</div>
+  <div id="hC2" class="pill m" style="left:400px;top:350px">engaja</div>
+  <div id="hC3" class="pill" style="left:22px;top:480px">converte</div>
+  <div id="hNotif" class="abs" style="left:60px;right:60px;top:60px;height:70px;border-radius:20px;background:var(--cream);color:var(--g900);display:flex;align-items:center;gap:14px;padding:0 16px;box-shadow:0 20px 40px rgba(0,0,0,.4)">
+    <div style="width:42px;height:42px;border-radius:12px;background:var(--g800);display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 4h3l2.5 11h10L21 7H7" fill="none" stroke="#8EE6B0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="19" r="1.8" fill="#8EE6B0"/><circle cx="17" cy="19" r="1.8" fill="#8EE6B0"/></svg></div>
+    <div><div style="font-weight:900;font-size:16px">Novo pedido recebido!</div><div style="font-size:13px;color:#4d5d55">Cliente veio pelo seu perfil · agora</div></div>
+  </div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== I: resultados ===== -->
+<div class="scene" id="I"><div class="cam" id="iCam">
+  <div class="abs" style="inset:0;background:#0B2E22"></div>
+  <div class="bgGrid" style="opacity:.5"></div>
+  <div id="iBars" class="abs" style="left:60px;right:60px;top:150px;height:560px;display:flex;align-items:flex-end;gap:22px">
+    <div style="flex:1;border-radius:14px 14px 4px 4px;background:#145239"></div><div style="flex:1;border-radius:14px 14px 4px 4px;background:#1B6847"></div><div style="flex:1;border-radius:14px 14px 4px 4px;background:#2A8A5E"></div>
+  </div>
+  <div id="iT1" class="abs word" style="left:36px;top:250px;font-size:62px"><span style="color:var(--mint)">Mais</span> alcance.</div>
+  <div id="iT2" class="abs word" style="left:36px;top:340px;font-size:62px"><span style="color:var(--mint)">Mais</span> autoridade.</div>
+  <div id="iT3" class="abs word" style="left:36px;top:430px;font-size:62px"><span style="color:var(--mint)">Mais</span> vendas.</div>
+  <svg class="abs" style="left:0;top:0" width="540" height="960"><path id="iArr" d="M60 690 L200 590 L290 630 L470 470" fill="none" stroke="#F4F0E4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path id="iHead" d="M440 462 L482 458 L476 500Z" fill="#F4F0E4"/></svg>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== J: acompanhamento ===== -->
+<div class="scene" id="J"><div class="cam" id="jCam">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#145239,#0B2E22 75%)"></div>
+  <div class="tag">Acompanhamento de perto</div>
+  <div id="jChart" class="card" style="left:36px;top:150px;width:468px;height:250px;padding:20px;background:rgba(244,240,228,.08)">
+    <div style="color:var(--mint);font-size:13px;font-weight:800;letter-spacing:2px">RELATÓRIO MENSAL</div>
+    <div class="word" style="font-size:28px;margin-top:4px">Crescimento</div>
+    <svg class="abs" style="left:20px;top:96px" width="428" height="140" viewBox="0 0 428 140">
+      <path id="jArea" d="M0 130 L0 118 L60 110 L120 112 L180 90 L240 80 L300 52 L360 40 L428 10 L428 130Z" fill="rgba(142,230,176,.15)"/>
+      <path id="jLine" d="M0 118 L60 110 L120 112 L180 90 L240 80 L300 52 L360 40 L428 10" fill="none" stroke="#8EE6B0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div id="jK1" class="card" style="left:36px;top:420px;width:146px;height:120px;padding:16px;background:rgba(244,240,228,.08)"><div style="font-size:12px;color:var(--mute);font-weight:700">ALCANCE</div><div class="word" style="font-size:32px;color:var(--mint);margin-top:16px">+<span id="jV1">0</span>%</div></div>
+  <div id="jK2" class="card" style="left:197px;top:420px;width:146px;height:120px;padding:16px;background:rgba(244,240,228,.08)"><div style="font-size:12px;color:var(--mute);font-weight:700">SEGUIDORES</div><div class="word" style="font-size:32px;color:var(--mint);margin-top:16px">+<span id="jV2">0</span>k</div></div>
+  <div id="jK3" class="card" style="left:358px;top:420px;width:146px;height:120px;padding:16px;background:rgba(244,240,228,.08)"><div style="font-size:12px;color:var(--mute);font-weight:700">VENDAS</div><div class="word" style="font-size:32px;color:var(--mint);margin-top:16px">+<span id="jV3">0</span>%</div></div>
+  <div id="jWeek" class="card" style="left:36px;top:560px;width:468px;height:120px;padding:16px 20px;background:rgba(244,240,228,.08)">
+    <div style="font-size:12px;color:var(--mute);font-weight:700;letter-spacing:1px">REUNIÕES SEMANAIS</div>
+    <div id="jDays" style="display:flex;gap:12px;margin-top:14px"></div>
+  </div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- ===== K: CTA ===== -->
+<div class="scene" id="K"><div class="cam" id="kCam">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 42%,#1B6847,#061A13 75%)"></div>
+  <div class="bgGrid" style="opacity:.5"></div>
+  <div id="kParts" class="abs" style="inset:0"></div>
+  <div id="kLogo" class="abs" style="left:0;right:0;top:200px;text-align:center">
+    <div id="kIcon" class="logoBox" style="width:130px;height:130px;margin:0 auto"><svg viewBox="0 0 100 100" width="98" height="98"><use href="#lever"/></svg></div>
+    <div id="kWord" class="word" style="font-size:62px;margin-top:22px;letter-spacing:-2.5px">ala<span style="color:var(--mint)">v</span>ancar</div>
+  </div>
+  <div id="kTag" class="abs word" style="left:40px;right:40px;top:470px;text-align:center;font-size:30px;line-height:1.15;letter-spacing:-.6px">O impulso que o seu<br>negócio <span style="color:var(--mint)">precisava.</span></div>
+  <div id="kBtn" class="pill m" style="left:50%;top:600px;font-size:20px;padding:16px 28px;display:flex;align-items:center;gap:10px">
+    <svg width="22" height="22" viewBox="0 0 24 24"><path d="M2 11 L22 3 L15 22 L11 13Z" fill="#0B2E22"/></svg>Chama no direct</div>
+  <div id="kRip" class="abs" style="left:270px;top:631px;width:10px;height:10px;margin:-5px;border-radius:50%;border:3px solid var(--cream)"></div>
+  <div id="kHandle" class="abs" style="left:0;right:0;top:700px;text-align:center;font-weight:700;font-size:20px;color:var(--mute);letter-spacing:1px">@alavancar</div>
+  <div class="vign"></div>
+</div></div>
+
+<div id="sweep"></div><div id="sweep2"></div>
+<div id="flash"></div>
+<div id="cap"></div>
+<div id="grain"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const p=(t,a,b)=>cl((t-a)/(b-a));
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eo=x=>1-Math.pow(1-x,3);
+const eo5=x=>1-Math.pow(1-x,5);
+const ei=x=>x*x*x;
+const bk=x=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+const el=x=>x===0?0:x===1?1:Math.pow(2,-10*x)*Math.sin((x*10-.75)*2.094)+1;
+const lerp=(a,b,x)=>a+(b-a)*x;
+const shake=(t,t0,amp)=>t<t0?0:amp*Math.exp(-(t-t0)*9)*Math.sin((t-t0)*70);
+// word time: line id, index or prefix
+function W(id,k){const l=TL[id];if(typeof k==='number')return l.wt[k];
+  const i=l.words.findIndex(w=>w.toLowerCase().replace(/[^a-zà-ú]/g,'').startsWith(k));return l.wt[i<0?0:i];}
+const S=[ // scenes
+ ['A',0,3.8],['B',3.8,6.8],['C',6.8,13.2],['D',13.2,17.1],['E',17.1,23.2],['F',23.2,30.5],
+ ['G',30.5,36.8],['H',36.8,43.4],['I',43.4,47.0],['J',47.0,52.3],['K',52.3,60.01]];
+const SWEEPS=[17.1,23.2,36.8,52.3]; // lever sweep transitions
+// build kinetic heads
+function kinetic(elId,id,from,to){const e=$(elId);const l=TL[id];
+  for(let i=from;i<=to;i++){const s=document.createElement('span');s.textContent=l.words[i];s.dataset.t=l.wt[i];e.appendChild(s);} }
+kinetic('aH1','s1',0,3); kinetic('aH2','s1',4,9);
+function headRender(elId,t){$(elId).querySelectorAll('span').forEach(s=>{const q=p(t,+s.dataset.t-0.06,+s.dataset.t+0.22);
+  s.style.opacity=q;s.style.transform=`translateY(${(1-eo(q))*36}px) rotate(${(1-eo(q))*6}deg)`;s.style.filter=`blur(${(1-q)*6}px)`;});}
+// wordmark letters
+'alavancar'.split('').forEach((c,i)=>{const s=document.createElement('span');s.textContent=c;s.style.display='inline-block';if(i===4)s.style.color='var(--mint)';$('dWord').appendChild(s);});
+// grid posts
+const PC=[['#0E3B2C','#8EE6B0'],['#F4F0E4','#145239'],['#2A8A5E','#F4F0E4'],['#8EE6B0','#0B2E22'],['#145239','#F4F0E4'],['#0B2E22','#8EE6B0'],['#F4F0E4','#2A8A5E'],['#1B6847','#8EE6B0'],['#8EE6B0','#145239']];
+PC.forEach((c,i)=>{const d=document.createElement('div');d.className='post';d.style.cssText=`aspect-ratio:1;background:${c[0]};position:relative;overflow:hidden;border-radius:4px`;
+  const shape=i%3===0?`<div style="position:absolute;left:20%;top:20%;width:60%;height:60%;border-radius:50%;background:${c[1]}"></div>`:i%3===1?`<div style="position:absolute;left:12%;right:12%;top:30%;height:12%;border-radius:6px;background:${c[1]}"></div><div style="position:absolute;left:12%;right:35%;top:52%;height:12%;border-radius:6px;background:${c[1]};opacity:.6"></div>`:`<div style="position:absolute;left:0;bottom:0;width:100%;height:45%;background:${c[1]};clip-path:polygon(0 100%,0 60%,35% 20%,60% 55%,100% 0,100% 100%)"></div>`;
+  d.innerHTML=shape;$('hGrid').appendChild(d);});
+for(let i=0;i<12;i++){const h=document.createElement('div');h.className='abs';h.innerHTML='<svg width="30" height="28" viewBox="0 0 24 22"><path d="M12 20 C-6 8 4 -4 12 5 C20 -4 30 8 12 20Z" fill="#8EE6B0"/></svg>';h.dataset.i=i;$('hHearts').appendChild(h);}
+['S','T','Q','Q','S','S','D'].forEach((d,i)=>{const e=document.createElement('div');e.style.cssText='width:48px;height:48px;border-radius:14px;background:rgba(244,240,228,.08);display:flex;align-items:center;justify-content:center;font-weight:800;color:#8FA89B;font-size:15px;position:relative';e.textContent=d;$('jDays').appendChild(e);});
+for(let i=0;i<26;i++){const e=document.createElement('div');e.className='abs';const s=4+((i*37)%9);e.style.cssText=`width:${s}px;height:${s}px;border-radius:${i%3?'50%':'2px'};background:${i%2?'#8EE6B0':'#F4F0E4'}`;$('kParts').appendChild(e);}
+const lenOf=id=>$(id).getTotalLength();
+['cLine','gPath','eArr','iArr','jLine'].forEach(id=>{const L=lenOf(id);$(id).style.strokeDasharray=L;$(id).dataset.L=L;});
+const draw=(id,q)=>{$(id).style.strokeDashoffset=(+$(id).dataset.L)*(1-q);};
+
+/* ---------------- scenes ---------------- */
+const R={};
+R.A=t=>{ // hook
+  const cam=$('A').firstElementChild;
+  cam.style.transform=`scale(${lerp(1,1.12,eio(p(t,0,3.8)))}) translateX(${shake(t,W('s1',4),6)}px)`;
+  const st=bk(p(t,0.05,0.45));
+  const swap=W('s1',4)-0.15;
+  headRender('aH1',t); $('aH1').style.opacity=1-p(t,swap-0.1,swap+0.1); $('aH1').style.transform=`translateY(${-ei(p(t,swap-0.1,swap+0.15))*40}px)`;
+  headRender('aH2',t); $('aH2').style.display=t>swap?'block':'none';
+  const sad=p(t,swap,swap+0.6);
+  $('aStore').style.transform=`translateY(${lerp(0,40,eo(sad))}px) scale(${Math.max(0,st)*lerp(1,0.82,eo(sad))})`;
+  $('aStore').style.filter=`saturate(${1-sad*0.9}) brightness(${1-sad*0.35})`;
+  $('aSpot').style.opacity=1-sad*0.75;
+  // eye (closed) pops in at "vendo"
+  const ev=W('s1','vendo'); $('aEye').style.display=t>ev-0.1?'block':'none';
+  const eq=bk(p(t,ev-0.1,ev+0.25)); $('aEye').style.transform=`translateY(220px) scale(${Math.max(0,eq)})`;
+  $('aSlash').style.strokeDasharray=100;$('aSlash').style.strokeDashoffset=100*(1-p(t,ev+0.1,ev+0.4));
+};
+R.B=t=>{
+  const a=3.8, tap=W('s2','posta')-0.05, nada=W('s2','nada');
+  $('B').firstElementChild.style.transform=`rotate(${lerp(-3,2,p(t,a,6.8))}deg) scale(${lerp(1.05,1,eo(p(t,a,a+0.6)))})`;
+  const rq=p(t,tap,tap+0.45);$('bRipple').style.transform=`scale(${rq*14})`;$('bRipple').style.opacity=rq>0?1-rq:0;
+  $('bBtn').style.transform=`scale(${1-0.06*Math.sin(Math.PI*p(t,tap,tap+0.2))})`;
+  const po=eo(p(t,tap+0.15,tap+0.55)); $('bPost').style.transform=`translateY(${(1-po)*40}px)`;$('bPost').style.opacity=po;
+  const n=p(t,nada-0.1,nada+0.4);
+  $('bPhone').style.transform=`perspective(900px) rotateX(${n*14}deg) translateY(${n*30}px)`;
+  $('bPhone').style.filter=`grayscale(${n}) brightness(${1-n*0.3})`;
+  $('bZero').style.opacity=n;$('bZero').style.transform=`scale(${lerp(1.4,1,eo(n))})`;
+  $('bDots').style.opacity=p(t,W('s2','esforça'),W('s2','esforça')+0.3)*(1-n*0.3);
+  $('bDots').style.letterSpacing=(8+6*Math.sin(t*6))+'px';
+};
+R.C=t=>{
+  const k=[W('s3','perfil'),W('s3','poucas'),W('s3','concorrente')];
+  ['c1','c2','c3'].forEach((id,i)=>{const q=eo5(p(t,k[i]-0.2,k[i]+0.3));const e=$(id);
+    e.style.transform=`perspective(900px) translateY(${(1-q)*120}px) rotateX(${(1-q)*-40}deg)`;e.style.opacity=q;});
+  const camY=t<k[1]?0:(t<k[2]?lerp(0,-40,eio(p(t,k[1],k[1]+0.5))):lerp(-40,-90,eio(p(t,k[2],k[2]+0.5))));
+  $('cCam').style.transform=`translateY(${camY+60}px) scale(${lerp(1.02,1.08,p(t,6.8,13.2))})`;
+  draw('cLine',eio(p(t,k[1],k[1]+1.2)));
+  $('cFol').textContent=Math.round(lerp(318,312,p(t,k[0],k[0]+1)));
+  const r=p(t,k[2]+0.1,12.7);
+  $('cMe').style.transform=`translateX(${lerp(0,90,eio(r))}px)`;
+  $('cThem').style.transform=`translateX(${lerp(0,300,eio(r))}px)`;
+  // fade to dark before lever
+  $('C').style.filter=`brightness(${1-ei(p(t,12.85,13.2))})`;
+};
+R.D=t=>{
+  const drop=13.55, hit=13.85, launch=14.3;
+  $('dLeverWrap').style.display=t<14.45?'block':'none';
+  const ang=t<hit?18:lerp(18,-20,eo5(p(t,hit,hit+0.18)));
+  $('dBar').style.transform=`rotate(${ang}deg)`;
+  const wy=t<hit?lerp(-120,0,ei(p(t,drop,hit))):0;
+  // weight sits on left end; compute left end y
+  const lx=-170, ly=0; // relative to pivot
+  const ra=ang*Math.PI/180; const ex=270+lx*Math.cos(ra), ey=598+lx*Math.sin(ra);
+  const wyy=t<hit?lerp(-100,ey-82,ei(p(t,drop,hit))):ey-82;
+  $('dWeight').style.transform=`translate(${ex-38-76}px,${wyy}px) rotate(${t<hit?-8:ang}deg)`;
+  $('dWeight').style.opacity=p(t,drop-0.05,drop+0.05);
+  const sl=p(t,hit+0.05,launch); // store launch
+  $('dStore').style.transform=`translateY(${-ei(sl)*900}px) rotate(${sl*-30}deg)`;
+  $('dStore').style.filter=`blur(${sl*6}px)`;
+  // camera
+  const whip=p(t,hit+0.05,14.45);
+  $('dCam').style.transform=`translateY(${ei(whip)*500+shake(t,hit,10)}px) rotate(${shake(t,hit,1.2)}deg)`;
+  $('dCam').style.filter=`blur(${Math.sin(Math.PI*whip)*10}px)`;
+  if(t>=14.45){ // logo
+    const lt=t-14.45;
+    $('dCam').style.transform=`perspective(900px) rotateY(${lerp(14,-4,eio(p(t,14.45,17.1)))}deg) scale(${lerp(1.12,1,eo(p(t,14.45,15.2)))})`;
+    $('dCam').style.filter='none';
+  }
+  $('dLogo').style.display=t>=14.4?'block':'none';
+  const ic=el(p(t,14.45,15.25));$('dIcon').style.transform=`scale(${ic}) rotate(${(1-ic)*-30}deg)`;
+  $('dWord').querySelectorAll('span').forEach((s,i)=>{const q=eo(p(t,14.75+i*0.05,15.1+i*0.05));s.style.opacity=q;s.style.transform=`translateY(${(1-q)*40}px)`;s.style.filter=`blur(${(1-q)*5}px)`;});
+  const tg=p(t,15.5,16.0);$('dTag').style.opacity=tg;$('dTag').style.letterSpacing=lerp(8,3,eo(tg))+'px';
+  $('flash').style.opacity=t>14.3&&t<14.7?(1-p(t,14.35,14.7))*0.9:0;
+};
+R.E=t=>{
+  $('eCam').style.transform=`scale(${lerp(1.08,1,eo(p(t,17.1,18)))}) translateY(${lerp(0,-20,p(t,17.1,23.2))}px)`;
+  const g=W('s5','crescerem');
+  const hub=bk(p(t,17.25,17.7))*lerp(1,1.12,eo(p(t,g,g+0.5)));$('eHub').style.transform=`scale(${hub})`;
+  $('eBars').querySelectorAll('div').forEach((b,i)=>{const q=eo(p(t,g-0.2+i*0.08,g+0.5+i*0.08));b.style.height=(lerp(30,90+i*55,q))+'px';});
+  [['eP1','marketing','eL1'],['eP2','identidade','eL2'],['eP3','estratégia','eL3']].forEach(([id,w,ln])=>{
+    const k=W('s5',w); const q=bk(p(t,k-0.1,k+0.3)); $(id).style.transform=`scale(${Math.max(0,q)})`;$(id).style.opacity=p(t,k-0.1,k);
+    $(ln).style.opacity=p(t,k-0.1,k+0.2);});
+  draw('eArr',eo(p(t,g,g+0.6)));$('eArrHead').style.opacity=p(t,g+0.5,g+0.6);
+  $('eTag').style.opacity=p(t,17.3,17.7);
+};
+R.F=t=>{
+  const lem=W('s6','lembrada'), id0=W('s6','identidade');
+  const f=eio(p(t,lem-0.3,lem+0.4));
+  const orbit=p(t,23.2,30.5);
+  $('fBoard').style.transform=`rotateX(${lerp(52,8,f)}deg) rotateZ(${lerp(-28+orbit*8,-3,f)}deg) translateY(${lerp(40,0,f)}px) scale(${lerp(0.9,1,f)*lerp(0.6,1,eo(p(t,23.2,id0+0.2)))})`;
+  $('fBoard').style.opacity=p(t,23.2,23.6);
+  [['fSw','cores'],['fLogo','logo'],['fType','tipografia']].forEach(([id,w])=>{const k=W('s6',w);const q=eo5(p(t,k-0.15,k+0.35));
+    $(id).style.transform=`translateZ(${(1-q)*260}px) translateY(${(1-q)*-60}px)`;$(id).style.opacity=q;});
+  $('fSw').querySelectorAll('div').forEach((d,i)=>{const k=W('s6','cores');const q=bk(p(t,k+i*0.06,k+0.3+i*0.06));d.style.transform=`scale(${Math.max(0,q)})`;});
+  const sq=el(p(t,lem,lem+0.6));$('fSeal').style.transform=`translateZ(60px) scale(${sq}) rotate(${(1-sq)*-90+ (t-23)*4}deg)`;
+  $('fCam').style.transform=`scale(${lerp(1.05,1,p(t,23.2,30.5))}) translateX(${shake(t,lem,5)}px)`;
+};
+R.G=t=>{
+  const k0=30.9,k1=W('s7','público'),k2=W('s7','objetivos');
+  const dq=t<k1?lerp(0,0.38,eio(p(t,k0,k1))):t<k2?lerp(0.38,0.7,eio(p(t,k1,k2))):lerp(0.7,1,eio(p(t,k2,k2+0.8)));
+  draw('gPath',dq);
+  const n=(id,k)=>{const q=bk(p(t,k-0.1,k+0.3));$(id).style.transform=`scale(${Math.max(0,q)})`;$(id).style.opacity=p(t,k-0.1,k);};
+  n('gN0',31.0);n('gN1',k1);n('gN2',k2-0.15);n('gN3',k2+0.7);
+  const pl=eo(p(t,k2+0.9,k2+1.3));$('gPlan').style.opacity=pl;$('gPlan').style.transform=`translateY(${(1-pl)*14}px)`;
+  const dt=p(t,k2+0.1,k2+0.35);$('gDart').style.transform=`translate(${(1-eo(dt))*60}px,${-(1-eo(dt))*60}px)`;$('gDart').style.opacity=dt>0?1:0;
+  // camera follows tip
+  const fy=lerp(-90,105,eio(dq)), fx=lerp(60,-55,eio(dq));
+  $('gCam').style.transform=`scale(1.18) translate(${fx}px,${fy}px) rotate(${lerp(-3,2,dq)}deg) translateY(${shake(t,k2+0.35,4)}px)`;
+};
+R.H=t=>{
+  const a=36.8,cl1=W('s8','clientes');
+  const intro=eio(p(t,a,a+1.0));
+  $('hPhone').style.transform=`rotateY(${lerp(-35,0,intro)}deg) rotateX(${lerp(12,0,intro)}deg) scale(${lerp(1.25,1,intro)})`;
+  $('hCam').style.transform=`scale(${lerp(1,1.06,p(t,a+1,43.4))}) translateY(${shake(t,cl1,5)}px)`;
+  $('hGrid').querySelectorAll('div.post').forEach((d,i)=>{const q=bk(p(t,37.4+i*0.12,37.75+i*0.12));d.style.transform=`scale(${Math.max(0,q)})`;});
+  const fol=Math.round(lerp(312,18400,ei(p(t,37.6,cl1))));$('hFol').textContent=fol>=1000?(fol/1000).toFixed(1).replace('.',',')+' mil':fol;
+  [['hC1','atrai'],['hC2','engaja'],['hC3','transforma']].forEach(([id,w])=>{const k=W('s8',w);const q=bk(p(t,k-0.1,k+0.3));$(id).style.transform=`scale(${Math.max(0,q)}) rotate(${id==='hC2'?6:-5}deg)`;});
+  const eg=W('s8','engaja');
+  $('hHearts').querySelectorAll('div').forEach(h=>{const i=+h.dataset.i;const st=eg-0.2+i*0.12;const q=p(t,st,st+1.4);
+    h.style.left=(150+((i*67)%240))+'px';h.style.top=(lerp(560,240,eo(q)))+'px';h.style.opacity=q>0&&q<1?Math.sin(Math.PI*q):0;h.style.transform=`scale(${0.6+((i*13)%6)/10}) rotate(${Math.sin(t*4+i)*15}deg)`;});
+  const nq=eo5(p(t,cl1-0.1,cl1+0.35));$('hNotif').style.transform=`translateY(${(1-nq)*-160}px)`;
+};
+R.I=t=>{
+  const k=[W('s9',0),W('s9',2),W('s9',4)];
+  let sh=0;
+  ['iT1','iT2','iT3'].forEach((id,i)=>{const q=p(t,k[i]-0.05,k[i]+0.12);const e=$(id);
+    e.style.opacity=q>0?1:0;e.style.transform=`scale(${lerp(2.2,1,eo5(q))})`;e.style.filter=`blur(${(1-q)*8}px)`;e.style.transformOrigin='0 50%';
+    sh+=shake(t,k[i]+0.12,9);});
+  $('iBars').querySelectorAll('div').forEach((b,i)=>{b.style.height=lerp(10,[180,320,500][i],eo5(p(t,k[i]-0.05,k[i]+0.35)))+'px';});
+  draw('iArr',eio(p(t,k[2]+0.3,k[2]+0.9)));$('iHead').style.opacity=p(t,k[2]+0.8,k[2]+0.9);
+  $('iCam').style.transform=`translate(${sh}px,${sh*0.6}px) scale(${lerp(1.06,1,p(t,43.4,47))})`;
+  $('flash').style.opacity=t<43.6?(1-p(t,43.4,43.6))*0.7:0;
+};
+R.J=t=>{
+  const a=47.0,med=W('s10','medir');
+  const z=eo(p(t,a,a+0.8));$('jCam').style.transform=`scale(${lerp(1.5,1,z)}) rotate(${lerp(4,0,z)}deg)`;
+  $('jCam').style.filter=`blur(${(1-p(t,a,a+0.4))*10}px)`;
+  draw('jLine',eio(p(t,47.4,49.2)));$('jArea').style.opacity=p(t,48.6,49.3);
+  ['jK1','jK2','jK3'].forEach((id,i)=>{const q=bk(p(t,47.6+i*0.15,48.0+i*0.15));$(id).style.transform=`translateY(${(1-cl(q))*40}px) scale(${0.9+0.1*q})`;$(id).style.opacity=cl(q*1.5);
+    const g=p(t,med-0.1,med+0.5);$(id).style.boxShadow=`0 0 ${g*40}px rgba(142,230,176,${g*0.5})`;$(id).style.borderColor=`rgba(142,230,176,${0.1+g*0.6})`;});
+  const cq=eo(p(t,48.0,med+0.3));$('jV1').textContent=Math.round(320*cq);$('jV2').textContent=Math.round(18*cq);$('jV3').textContent=Math.round(87*cq);
+  const pe=W('s10','perto');
+  $('jDays').querySelectorAll('div').forEach((d,i)=>{const q=p(t,pe-0.2+i*0.1,pe+i*0.1);d.style.background=q>0.5?'#8EE6B0':'rgba(244,240,228,.08)';d.style.color=q>0.5?'#0B2E22':'#8FA89B';d.style.transform=`scale(${1+0.15*Math.sin(Math.PI*q)})`;});
+  $('jWeek').style.opacity=p(t,47.8,48.2);
+};
+R.K=t=>{
+  const a=52.3, imp=W('s11','impulso'), dm=W('s11','direct'), cr=W('s11','crescer');
+  const ic=el(p(t,a+0.15,a+0.95));$('kIcon').style.transform=`scale(${ic}) rotate(${(1-ic)*30}deg)`;
+  const wq=eo(p(t,a+0.4,a+0.9));$('kWord').style.opacity=wq;$('kWord').style.letterSpacing=lerp(10,-2.5,wq)+'px';$('kWord').style.filter=`blur(${(1-wq)*6}px)`;
+  const tq=eo(p(t,imp-0.2,imp+0.3));$('kTag').style.opacity=tq;$('kTag').style.transform=`translateY(${(1-tq)*30}px)`;
+  const bq=bk(p(t,dm-0.5,dm-0.1));$('kBtn').style.transform=`translateX(-50%) scale(${Math.max(0,bq)*(1-0.07*Math.sin(Math.PI*p(t,dm,dm+0.2)))})`;
+  const rq=p(t,dm,dm+0.6);$('kRip').style.transform=`scale(${rq*24})`;$('kRip').style.opacity=rq>0?1-rq:0;
+  $('kHandle').style.opacity=p(t,dm+0.2,dm+0.6);
+  $('kParts').querySelectorAll('div').forEach((e,i)=>{const st=cr-0.4+(i%9)*0.08;const q=p(t,st,st+1.8);
+    e.style.left=(30+((i*97)%480))+'px';e.style.top=lerp(980,-40-((i*53)%300),eo(q))+'px';e.style.opacity=q>0&&q<1?0.9:0;e.style.transform=`rotate(${q*360*(i%2?1:-1)}deg)`;});
+  // lever bob on icon
+  $('kCam').style.transform=`scale(${lerp(1.04,1,p(t,a,60))}) translateY(${lerp(0,-10,p(t,a,60))}px)`;
+  $('kLogo').style.transform=`translateY(${lerp(0,-10,eio(p(t,imp-0.3,imp+0.3)))}px)`;
+};
+
+/* ---------------- transitions ---------------- */
+function enterExit(id,a,b,t){
+  const e=$(id); let tr='', f=0, op=1;
+  // whips
+  if(id==='C'&&t<a+0.25){const q=1-p(t,a-0.05,a+0.25);tr=`translateX(${eo(q)*540}px)`;f=q*14;}
+  if(id==='B'&&t>b-0.25){const q=p(t,b-0.25,b+0.05);tr=`translateX(${-ei(q)*540}px)`;f=q*14;}
+  if(id==='A'&&t>b-0.3){const q=p(t,b-0.3,b+0.05);tr=`scale(${1+ei(q)*2.5})`;f=q*12;op=1-ei(q);}
+  if(id==='B'&&t<a+0.3){const q=1-p(t,a-0.05,a+0.3);tr=`scale(${1-q*0.4})`;f=q*10;}
+  if(id==='G'&&t<a+0.3){const q=1-p(t,a-0.05,a+0.3);tr=`translateY(${eo(q)*-960}px)`;f=q*16;}
+  if(id==='F'&&t>b-0.3){const q=p(t,b-0.3,b+0.05);tr=`translateY(${ei(q)*960}px)`;f=q*16;}
+  if(id==='I'&&t>b-0.2){const q=p(t,b-0.2,b+0.05);tr=`scale(${1-ei(q)*0.3})`;op=1-q;}
+  e.style.transform=tr;e.style.filter=f?`blur(${f}px)`:'none';e.style.opacity=op;
+}
+function wedge(a1,a2){ // angles deg from pivot (0,960), 0=right,90=up
+  const P=a=>{const r=a*Math.PI/180;return `${Math.cos(r)*3000}px ${960-Math.sin(r)*3000}px`;};
+  return `polygon(0px 960px, ${P(a1)}, ${P((a1+a2)/2)}, ${P(a2)})`;}
+function sweeps(t){
+  const s1=$('sweep'),s2=$('sweep2');s1.style.display=s2.style.display='none';
+  for(const b of SWEEPS){
+    if(t>b-0.32&&t<b+0.34){
+      const c=p(t,b-0.32,b), r=p(t,b,b+0.34);
+      const lag=0.18;
+      if(t<b){s2.style.display='block';s2.style.clipPath=wedge(-1,lerp(-1,92,eio(c)));
+              s1.style.display='block';s1.style.clipPath=wedge(-1,lerp(-1,92,eio(cl(c*1.25-lag))));}
+      else{ s2.style.display='block';s2.style.clipPath=wedge(lerp(-1,92,eio(cl(r*1.25))),92);
+            s1.style.display='block';s1.style.clipPath=wedge(lerp(-1,92,eio(cl(r*1.25-lag))),92);}
+    }
+  }
+}
+function captions(t){
+  const c=$('cap');let html='';
+  for(const id in TL){const l=TL[id];if(!l.cap||t<l.start-0.05||t>l.end+0.25)continue;
+    let wi=0;for(let i=0;i<l.wt.length;i++)if(t>=l.wt[i])wi=i;
+    const ch=Math.floor(wi/3)*3;const ws=l.words.slice(ch,ch+3);
+    const pop=p(t,l.wt[ch]-0.02,l.wt[ch]+0.12);
+    html=ws.map((w,j)=>`<span class="${ch+j===wi?'on':''}">${w}</span>`).join('');
+    c.style.transform=`scale(${lerp(0.85,1,eo(pop))})`;}
+  c.innerHTML=html;
+}
+function render(t){
+  $('flash').style.opacity=0;
+  for(const [id,a,b] of S){const on=t>=a-0.35&&t<b+0.35;
+    // visible window: own range, plus overlap for whips
+    let vis=t>=a&&t<b;
+    if(['C','G'].includes(id)&&t>=a-0.05&&t<a)vis=true;
+    if(['A','B','F','I'].includes(id)&&t>=b&&t<b+0.05)vis=true;
+    $(id).style.display=vis?'block':'none';
+    if(vis){enterExit(id,a,b,t);R[id](t);}
+  }
+  // z-order: later scenes on top
+  sweeps(t);captions(t);
+}
+window.render=render;
+</script></body></html>
