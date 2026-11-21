@@ -1,6 +1,8 @@
 """Monta o vídeo final: quadros (12 fps) -> 1080x1920 30 fps + legendas + narração + torcida.
 
-Uso: python3 montar.py <pasta_quadros> <narracao.wav> <legendas.tsv> <saida.mp4> [duracao]
+Uso: python3 montar.py <pasta_quadros> <narracao.wav> <legendas.tsv|-> <saida.mp4> [duracao]
+
+Passe "-" no lugar das legendas para montar sem legenda.
 """
 import os, subprocess, sys, tempfile
 
@@ -10,7 +12,8 @@ FONTE = "/usr/share/fonts/opentype/inter/InterDisplay-Black.otf"
 tmp = tempfile.mkdtemp()
 
 filtros = ["scale=1080:1920:flags=lanczos", "fps=30"]
-for i, linha in enumerate(open(legendas, encoding="utf-8")):
+linhas = [] if legendas == "-" else open(legendas, encoding="utf-8")
+for i, linha in enumerate(linhas):
     if not linha.strip():
         continue
     a, b, txt = linha.rstrip("\n").split("\t")
