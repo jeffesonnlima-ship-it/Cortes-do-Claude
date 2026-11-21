@@ -37,8 +37,8 @@ cmd = ["ffmpeg", "-v", "error", "-y",
        "-f", "lavfi", "-i", torcida,
        "-filter_complex",
        f"[0:v]{','.join(filtros)}[v];"
-       f"[1:a]aresample=48000,volume=1.6,apad[n];[2:a]aresample=48000[t];"
-       f"[n][t]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.89,atrim=0:{dur}[a]",
+       f"[1:a]aresample=48000,volume=1.15,apad[n];[2:a]aresample=48000[t];"
+       f"[n][t]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.7:level=false,atrim=0:{dur}[a]",
        "-map", "[v]", "-map", "[a]", "-t", str(dur),
        "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p",
        "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", saida]
