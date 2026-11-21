@@ -3,6 +3,8 @@
 Uso: python3 montar.py <pasta_quadros> <narracao.wav> <legendas.tsv|-> <saida.mp4> [duracao]
 
 Passe "-" no lugar das legendas para montar sem legenda.
+Com TORCIDA=0 no ambiente, não mistura a torcida sintética (use quando o áudio já tem torcida).
+NARRACAO_VOL ajusta o ganho do áudio principal (padrão 1.15).
 """
 import os, subprocess, sys, tempfile
 
@@ -31,14 +33,19 @@ filtros.append(
 torcida = (f"anoisesrc=color=brown:duration={dur}:amplitude=0.6,lowpass=f=900,highpass=f=120,"
            f"volume='0.10+0.22*between(t,9.9,12.6)':eval=frame,afade=t=in:d=0.6,"
            f"afade=t=out:st={dur-0.8}:d=0.8")
+com_torcida = os.environ.get("TORCIDA", "1") != "0"
+vol = os.environ.get("NARRACAO_VOL", "1.15")
+if com_torcida:
+    audio = (f"[1:a]aresample=48000,volume={vol},apad[n];[2:a]aresample=48000[t];"
+             f"[n][t]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.7:level=false,atrim=0:{dur}[a]")
+else:
+    audio = f"[1:a]aresample=48000,volume={vol},apad,alimiter=limit=0.7:level=false,atrim=0:{dur}[a]"
 cmd = ["ffmpeg", "-v", "error", "-y",
        "-framerate", "12", "-i", os.path.join(quadros, "f_%04d.png"),
        "-i", narracao,
        "-f", "lavfi", "-i", torcida,
        "-filter_complex",
-       f"[0:v]{','.join(filtros)}[v];"
-       f"[1:a]aresample=48000,volume=1.15,apad[n];[2:a]aresample=48000[t];"
-       f"[n][t]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.7:level=false,atrim=0:{dur}[a]",
+       f"[0:v]{','.join(filtros)}[v];" + audio,
        "-map", "[v]", "-map", "[a]", "-t", str(dur),
        "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p",
        "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", saida]
