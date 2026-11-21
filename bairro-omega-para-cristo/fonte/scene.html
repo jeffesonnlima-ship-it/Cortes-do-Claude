@@ -1,0 +1,291 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<script src="timeline.js"></script>
+<style>
+:root{--n950:#030B1C;--n900:#071733;--n800:#0B2047;--n700:#122E63;--n600:#1B3F86;--n400:#4F78C4;--sky:#BFD4FF;--w:#FFFFFF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:540px;height:960px;overflow:hidden;background:var(--n950);font-family:'Inter',sans-serif;color:#fff}
+#root{position:absolute;inset:0;overflow:hidden;background:var(--n950)}
+.scene{position:absolute;inset:0;display:none;overflow:hidden}
+.cam{position:absolute;inset:0;transform-origin:50% 50%}
+.abs{position:absolute}
+.D{font-family:'Inter Display','Inter';font-weight:900;letter-spacing:-1px;text-transform:uppercase;line-height:.95}
+.L{font-family:'Inter Display','Inter';font-weight:300;letter-spacing:6px;text-transform:uppercase}
+.glow{text-shadow:0 0 30px rgba(191,212,255,.65),0 0 80px rgba(79,120,196,.6)}
+.vign{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 40%,rgba(1,5,14,.85) 100%);pointer-events:none}
+.rays{position:absolute;left:50%;top:50%;width:1800px;height:1800px;margin:-900px 0 0 -900px;
+  background:repeating-conic-gradient(from 0deg,rgba(191,212,255,.14) 0deg 4deg,transparent 4deg 15deg);
+  -webkit-mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.6) 25%,transparent 60%);mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.6) 25%,transparent 60%)}
+#parts{position:absolute;inset:0;pointer-events:none}
+#flash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,#fff 0%,#DCE7FF 30%,rgba(191,212,255,0) 70%);opacity:0}
+#grain{position:absolute;inset:0;opacity:.06;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+.hl{display:inline-block;background:#fff;color:var(--n900);padding:2px 12px 0;border-radius:6px}
+.chip{display:inline-flex;align-items:center;gap:10px;border:1.5px solid rgba(191,212,255,.45);border-radius:999px;padding:10px 20px;font-weight:700;font-size:17px;letter-spacing:2px;text-transform:uppercase;background:rgba(11,32,71,.6)}
+</style></head>
+<body><div id="root">
+<svg width="0" height="0" style="position:absolute"><defs>
+  <path id="flame" d="M50 4 C58 22 74 30 72 52 C71 66 62 76 50 80 C58 70 58 60 52 50 C50 62 42 66 40 76 C30 70 26 60 28 50 C30 36 44 30 50 4Z M36 30 C34 42 22 46 24 60 C25 68 30 74 36 78 C26 76 16 66 16 54 C16 42 26 36 36 30Z"/>
+  <g id="leaf"><path d="M0 0 C6 -10 18 -12 26 -8 C18 -2 8 2 0 0Z"/></g>
+  <linearGradient id="fg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#BFD4FF"/><stop offset="1" stop-color="#fff"/></linearGradient>
+</defs></svg>
+
+<!-- A: escuridão -> luz -->
+<div class="scene" id="A"><div class="cam" id="aCam">
+  <div id="aBg" class="abs" style="inset:0;background:radial-gradient(circle at 50% 52%,#122E63 0%,#071733 35%,#030B1C 70%)"></div>
+  <div class="rays" id="aRays" style="top:52%"></div>
+  <div id="aT1" class="abs L" style="left:0;right:0;top:250px;text-align:center;font-size:22px;color:#9DB2DA">Em meio a tantas</div>
+  <div id="aT2" class="abs D" style="left:0;right:0;top:282px;text-align:center;font-size:92px;color:#2A3F66">lutas</div>
+  <svg id="aFlame" class="abs" viewBox="0 0 100 84" style="left:210px;top:420px;width:120px;height:101px;overflow:visible"><use href="#flame" fill="url(#fg)"/></svg>
+  <div id="aGlow" class="abs" style="left:120px;top:330px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(220,232,255,.55),rgba(79,120,196,.15) 45%,transparent 70%)"></div>
+  <div id="aT3" class="abs" style="left:0;right:0;top:610px;text-align:center"><span class="L" style="font-size:20px;color:#C9D7F2">uma</span> <span class="D glow" style="font-size:64px">luz</span></div>
+  <div id="aT4" class="abs L" style="left:0;right:0;top:690px;text-align:center;font-size:18px;color:#C9D7F2">que não se apaga</div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- B: bairro -->
+<div class="scene" id="B"><div class="cam" id="bCam">
+  <div class="abs" style="inset:0;background:linear-gradient(180deg,#030B1C 0%,#0B2047 55%,#1B3F86 100%)"></div>
+  <div class="rays" id="bRays" style="top:8%"></div>
+  <div id="bBeam" class="abs" style="left:150px;top:-100px;width:240px;height:900px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(191,212,255,.12) 70%,transparent);clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);filter:blur(10px)"></div>
+  <div id="bSab" class="abs L" style="left:0;right:0;top:150px;text-align:center;font-size:20px;color:#C9D7F2">neste sábado</div>
+  <div id="bTitle" class="abs" style="left:0;right:0;top:196px;text-align:center">
+    <div class="D" style="font-size:44px;letter-spacing:8px;color:#C9D7F2" id="bW1">Bairro</div>
+    <div class="D glow" style="font-size:118px;letter-spacing:-3px" id="bW2">Omega</div>
+  </div>
+  <div id="bVoz" class="abs" style="left:0;right:0;top:404px;text-align:center"><span class="L" style="font-size:18px;color:#C9D7F2">vai parar para ouvir a</span><br><span class="D" style="font-size:46px;display:inline-block;margin-top:8px"><span class="hl">voz de Deus</span></span></div>
+  <svg id="bCity" class="abs" style="left:-40px;top:560px" width="620" height="420" viewBox="0 0 620 420"></svg>
+  <div class="vign"></div>
+</div></div>
+
+<!-- C: louvor / palavra / transformação -->
+<div class="scene" id="C"><div class="cam" id="cCam">
+  <div class="abs" style="inset:0;background:radial-gradient(circle at 50% 45%,#122E63,#071733 55%,#030B1C)"></div>
+  <div class="rays" id="cRays" style="top:45%;opacity:.6"></div>
+  <div id="cNoite" class="abs L" style="left:0;right:0;top:170px;text-align:center;font-size:20px;color:#C9D7F2">uma noite de</div>
+  <div id="cW1" class="abs" style="left:0;right:0;top:250px;text-align:center">
+    <svg width="64" height="64" viewBox="0 0 64 64" style="display:block;margin:0 auto 6px"><path d="M24 46 V14 L50 8 V40" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><ellipse cx="18" cy="47" rx="8" ry="6" fill="#fff"/><ellipse cx="44" cy="41" rx="8" ry="6" fill="#fff"/></svg>
+    <div class="D glow" style="font-size:76px">Louvor</div></div>
+  <div id="cW2" class="abs" style="left:0;right:0;top:420px;text-align:center">
+    <svg width="80" height="56" viewBox="0 0 80 56" style="display:block;margin:0 auto 6px"><path d="M40 14 C28 6 14 6 4 10 V50 C14 46 28 46 40 54 C52 46 66 46 76 50 V10 C66 6 52 6 40 14Z M40 14 V54" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/></svg>
+    <div class="D glow" style="font-size:76px">Palavra</div></div>
+  <div id="cW3" class="abs" style="left:0;right:0;top:590px;text-align:center">
+    <svg viewBox="0 0 100 84" width="58" height="50" style="display:block;margin:0 auto 6px"><use href="#flame" fill="#fff"/></svg>
+    <div class="D" style="font-size:56px"><span class="hl">Transformação</span></div></div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- D: vidas / famílias -->
+<div class="scene" id="D"><div class="cam" id="dCam">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 80%,#1B3F86,#0B2047 40%,#030B1C 80%)"></div>
+  <div class="rays" id="dRays" style="top:78%"></div>
+  <div id="dV" class="abs" style="left:0;right:0;top:330px;text-align:center"><div class="L" style="font-size:20px;color:#C9D7F2">vidas serão</div>
+    <div id="dRest" class="D" style="font-size:60px;margin-top:8px;position:relative;display:inline-block">Restauradas
+      <div id="dShine" class="abs" style="top:-10px;bottom:-10px;width:80px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);mix-blend-mode:overlay;transform:skewX(-20deg)"></div></div></div>
+  <div id="dF" class="abs" style="left:0;right:0;top:330px;text-align:center"><div class="D glow" style="font-size:84px">Famílias</div>
+    <div class="L" style="font-size:20px;color:#C9D7F2;margin-top:10px">serão alcançadas</div></div>
+  <svg id="dFam" class="abs" style="left:110px;top:520px" width="320" height="260" viewBox="0 0 320 260">
+    <g fill="#030B1C" id="dPeople">
+      <circle cx="80" cy="70" r="26"/><path d="M40 260 C40 150 60 110 80 110 C100 110 120 150 120 260Z"/>
+      <circle cx="240" cy="64" r="28"/><path d="M196 260 C196 150 218 104 240 104 C262 104 284 150 284 260Z"/>
+      <circle cx="140" cy="140" r="18"/><path d="M114 260 C114 200 126 172 140 172 C154 172 166 200 166 260Z"/>
+      <circle cx="184" cy="150" r="15"/><path d="M162 260 C162 210 172 186 184 186 C196 186 206 210 206 260Z"/>
+    </g>
+  </svg>
+  <div id="dHalo" class="abs" style="left:70px;top:480px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(191,212,255,.3) 35%,transparent 65%)"></div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- E: título -->
+<div class="scene" id="E"><div class="cam" id="eCam">
+  <div class="abs" style="inset:0;background:radial-gradient(circle at 50% 46%,#1B3F86,#0B2047 40%,#030B1C 80%)"></div>
+  <div class="rays" id="eRays" style="top:46%"></div>
+  <svg id="eFlame" class="abs" viewBox="0 0 100 84" style="left:230px;top:200px;width:80px;height:67px"><use href="#flame" fill="#fff"/></svg>
+  <svg id="eLaurel" class="abs" style="left:20px;top:250px" width="500" height="420" viewBox="0 0 500 420"></svg>
+  <div id="eT" class="abs" style="left:0;right:0;top:300px;text-align:center">
+    <div id="eB" class="D" style="font-size:40px;letter-spacing:12px;color:#C9D7F2">Bairro</div>
+    <div id="eO" class="D glow" style="font-size:128px;letter-spacing:-4px;margin-top:2px">Omega</div>
+    <div id="eP" style="margin-top:6px"><span class="L" style="font-size:24px;letter-spacing:8px">para</span></div>
+    <div id="eC" class="D" style="font-size:72px;margin-top:6px"><span class="hl" style="padding:4px 18px 0">Cristo</span></div>
+  </div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- F: informações -->
+<div class="scene" id="F"><div class="cam" id="fCam">
+  <div class="abs" style="inset:0;background:linear-gradient(170deg,#0B2047,#071733 55%,#030B1C)"></div>
+  <div class="rays" style="top:10%;opacity:.5"></div>
+  <div class="abs" style="left:40px;top:110px" id="fTop"><div class="L" style="font-size:16px;color:#9DB2DA">Bairro Omega para Cristo</div></div>
+  <div id="fSab" class="abs D glow" style="left:40px;top:150px;font-size:96px">Sábado</div>
+  <div id="fDate" class="abs" style="left:40px;top:262px;display:flex;align-items:flex-end;gap:16px">
+    <div class="D" style="font-size:180px;letter-spacing:-8px;line-height:.8">05</div>
+    <div style="padding-bottom:8px"><div class="D" style="font-size:56px;letter-spacing:2px">Dez</div><div class="L" style="font-size:18px;color:#9DB2DA;margin-top:4px">2026</div></div>
+  </div>
+  <div id="fLine" class="abs" style="left:40px;top:428px;height:2px;width:460px;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))"></div>
+  <div id="fHour" class="abs" style="left:40px;top:452px;display:flex;align-items:center;gap:18px">
+    <svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="25" fill="none" stroke="#fff" stroke-width="4"/><path id="fHand" d="M29 29 V12" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M29 29 L40 35" stroke="#BFD4FF" stroke-width="4" stroke-linecap="round"/></svg>
+    <div class="D" style="font-size:76px;letter-spacing:-2px"><span class="hl">19H00</span></div></div>
+  <div id="fLoc" class="abs" style="left:40px;top:560px;display:flex;align-items:center;gap:16px">
+    <svg width="44" height="58" viewBox="0 0 44 58"><path d="M22 56 C22 56 4 34 4 21 A18 18 0 0 1 40 21 C40 34 22 56 22 56Z" fill="#fff"/><circle cx="22" cy="21" r="7" fill="#0B2047"/></svg>
+    <div><div class="L" style="font-size:14px;color:#9DB2DA;letter-spacing:4px">Local</div><div class="D" style="font-size:34px;letter-spacing:0">Terreno da igreja</div></div></div>
+  <div id="fChurch" class="abs" style="left:40px;top:660px"><div class="chip"><svg viewBox="0 0 100 84" width="18" height="16"><use href="#flame" fill="#fff"/></svg>AD Missão de Cristo SGA</div></div>
+  <div class="vign"></div>
+</div></div>
+
+<!-- G: final -->
+<div class="scene" id="G"><div class="cam" id="gCam">
+  <div class="abs" style="inset:0;background:radial-gradient(circle at 50% 40%,#1B3F86,#0B2047 40%,#030B1C 80%)"></div>
+  <div class="rays" id="gRays" style="top:36%"></div>
+  <div id="gVenha" class="abs D glow" style="left:0;right:0;top:110px;text-align:center;font-size:104px;letter-spacing:-2px">Venha</div>
+  <div id="gFam" class="abs L" style="left:0;right:0;top:222px;text-align:center;font-size:19px;color:#C9D7F2">e traga a sua <b style="font-weight:800;color:#fff">família</b></div>
+  <div id="gLogoW" class="abs" style="left:145px;top:290px;width:250px;height:250px">
+    <div class="abs" style="inset:-60px;border-radius:50%;background:radial-gradient(circle,rgba(191,212,255,.55),transparent 65%)" id="gLGlow"></div>
+    <img id="gLogo" src="logo.png" class="abs" style="inset:0;width:250px;height:250px;border-radius:50%;box-shadow:0 20px 60px rgba(0,0,0,.6)">
+  </div>
+  <div id="gSalva" class="abs" style="left:0;right:0;top:580px;text-align:center"><div class="L" style="font-size:20px;color:#C9D7F2;letter-spacing:8px">Só Jesus</div><div class="D" style="font-size:58px;margin-top:6px"><span class="hl">Cristo salva</span></div></div>
+  <div id="gInfo" class="abs" style="left:0;right:0;top:730px;text-align:center;font-size:15px;font-weight:700;letter-spacing:2px;color:#C9D7F2;text-transform:uppercase">Bairro Omega para Cristo<br><span style="color:#fff">Sáb · 05/12 · 19H00 · Terreno da igreja</span></div>
+  <div class="vign"></div>
+</div></div>
+
+<div id="parts"></div>
+<div id="flash"></div>
+<div id="grain"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const p=(t,a,b)=>cl((t-a)/(b-a));
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eo=x=>1-Math.pow(1-x,3), eo5=x=>1-Math.pow(1-x,5), ei=x=>x*x*x;
+const bk=x=>{const c1=1.6,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+const lerp=(a,b,x)=>a+(b-a)*x;
+const shake=(t,t0,amp)=>t<t0?0:amp*Math.exp(-(t-t0)*8)*Math.sin((t-t0)*65);
+function W(id,k){const l=TL[id];if(typeof k==='number')return l.wt[k];const i=l.words.findIndex(w=>w.toLowerCase().replace(/[^a-zà-ú]/g,'').startsWith(k));return l.wt[i<0?0:i];}
+const S=[['A',0,4.6],['B',4.6,9.05],['C',9.05,12.85],['D',12.85,16.65],['E',16.65,19.05],['F',19.05,24.75],['G',24.75,30.01]];
+const FLASH=[4.6,9.05,16.65,19.05,24.75];
+function rise(e,q,dy=40,bl=8){e.style.opacity=q;e.style.transform=`translateY(${(1-eo(q))*dy}px)`;e.style.filter=`blur(${(1-q)*bl}px)`;}
+function slam(e,q,s0=1.8){e.style.opacity=q>0?Math.min(1,q*3):0;e.style.transform=`scale(${lerp(s0,1,eo5(q))})`;e.style.filter=`blur(${(1-q)*10}px)`;}
+// city
+(function(){const g=$('bCity');let x=0,html='',wins=[];let k=0;
+  while(x<620){const w=50+((k*37)%40),h=90+((k*53)%110);const y=420-h;
+    html+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#040E24"/>`;
+    if(k%2===0)html+=`<path d="M${x-4} ${y} L${x+w/2} ${y-28} L${x+w+4} ${y}Z" fill="#040E24"/>`;
+    for(let r=0;r<Math.floor((h-24)/30);r++)for(let c=0;c<Math.floor((w-14)/18);c++){wins.push(`<rect class="win" x="${x+10+c*18}" y="${y+16+r*30}" width="9" height="13" rx="1" fill="#FFF6DA" opacity="0"/>`);}
+    x+=w+4;k++;}
+  // church with cross center
+  html+=`<g id="bChurch"><rect x="270" y="210" width="80" height="210" fill="#030A1B"/><path d="M262 210 L310 160 L358 210Z" fill="#030A1B"/><rect x="306" y="100" width="8" height="60" fill="#fff"/><rect x="292" y="116" width="36" height="8" fill="#fff"/><rect x="296" y="330" width="28" height="90" rx="14" fill="#BFD4FF" opacity=".9"/></g>`;
+  g.innerHTML=html+wins.join('');
+  const ws=[...g.querySelectorAll('.win')];ws.forEach((w,i)=>w.dataset.d=((i*7919)%97)/97);
+})();
+// laurel
+(function(){const g=$('eLaurel');let h='';
+  const CX=250,CY=215,RR=215;
+  const side=(sx)=>{let d='';for(let i=0;i<=40;i++){const th=(250-i*2.3)*Math.PI/180;const x=CX+sx*(RR*Math.cos(th)),y=CY-RR*Math.sin(th);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}
+    h+=`<path class="stem" d="${d}" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;
+    for(let i=0;i<8;i++){const th=(246-i*11.5)*Math.PI/180;const x=CX+sx*RR*Math.cos(th),y=CY-RR*Math.sin(th);
+      const tx=sx*Math.sin(th),ty=Math.cos(th); // tangent toward top
+      const base=Math.atan2(ty,tx)*180/Math.PI;
+      [-32,32].forEach((o,j)=>{h+=`<g class="lf" data-i="${i}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(base+o).toFixed(1)}) scale(${(1.35-i*0.05).toFixed(2)})"><use href="#leaf" fill="#fff"/></g>`;});}
+  };
+  side(-1);side(1);g.innerHTML=h;})();
+// particles
+for(let i=0;i<46;i++){const e=document.createElement('div');e.className='abs';const s=2+((i*13)%5);e.style.cssText=`width:${s}px;height:${s}px;border-radius:50%;background:#DCE7FF;box-shadow:0 0 ${s*3}px #BFD4FF`;e.dataset.x=((i*97)%540);e.dataset.sp=18+((i*31)%40);e.dataset.ph=(i*0.37)%1;$('parts').appendChild(e);}
+
+const R={};
+R.A=t=>{
+  const lz=W('s1','luz');
+  $('aCam').style.transform=`scale(${lerp(1.15,1,eo(p(t,0,4.6)))})`;
+  rise($('aT1'),p(t,W('s1',0)-0.1,W('s1',0)+0.4),20,6);
+  const lq=p(t,W('s1','lutas')-0.1,W('s1','lutas')+0.5);rise($('aT2'),lq,30,10);
+  $('aT2').style.transform+=` translateX(${shake(t,W('s1','lutas'),5)}px)`;
+  const dim=p(t,W('s1','existe'),lz);$('aT1').style.opacity*=1-dim*0.8;$('aT2').style.opacity*=1-dim*0.7;
+  // flame ignites
+  const fq=p(t,lz-0.35,lz+0.1);
+  const fl=0.9+0.06*Math.sin(t*14)+0.04*Math.sin(t*23);
+  $('aFlame').style.opacity=fq;$('aFlame').style.transform=`translateY(${lerp(0,-120,eio(p(t,lz,4.4)))}px) scale(${lerp(0.2,1,eo5(fq))*lerp(1,1.4,p(t,lz,4.4))} ,${lerp(0.2,1,eo5(fq))*fl*lerp(1,1.4,p(t,lz,4.4))})`;
+  $('aFlame').style.filter=`drop-shadow(0 0 ${20+30*fq}px rgba(220,232,255,.9))`;
+  $('aGlow').style.opacity=fq*(0.8+0.2*Math.sin(t*9));$('aGlow').style.transform=`translateY(${lerp(0,-120,eio(p(t,lz,4.4)))}px) scale(${lerp(0.3,1.5,eo(fq))})`;
+  $('aRays').style.opacity=fq*0.9;$('aRays').style.transform=`rotate(${t*6}deg) translateY(0)`;
+  $('aBg').style.filter=`brightness(${lerp(0.35,1.2,fq)})`;
+  rise($('aT3'),p(t,lz-0.05,lz+0.35),20,10);rise($('aT4'),p(t,W('s1','não')-0.1,W('s1','não')+0.35),16,6);
+};
+R.B=t=>{
+  const a=4.6;
+  $('bCam').style.transform=`translateY(${lerp(-90,0,eio(p(t,a,a+1.4)))}px) scale(${lerp(1.08,1,p(t,a,9.05))})`;
+  rise($('bSab'),p(t,W('s2','neste')-0.1,W('s2','neste')+0.3),16,6);
+  slam($('bW1'),p(t,W('s2','bairro')-0.08,W('s2','bairro')+0.2),1.5);
+  slam($('bW2'),p(t,W('s2','omega')-0.08,W('s2','omega')+0.22),2.2);
+  const vz=W('s2','voz');rise($('bVoz'),p(t,W('s2','parar')-0.1,W('s2','parar')+0.35),20,8);
+  $('bVoz').querySelector('.hl').style.transform=`scale(${t<vz-0.05?0.001:lerp(1.4,1,eo5(p(t,vz-0.05,vz+0.2)))})`;
+  const lit=p(t,W('s2','bairro')-0.2,W('s2','parar')+0.4);
+  $('bCity').querySelectorAll('.win').forEach(w=>{w.setAttribute('opacity',lit>+w.dataset.d?(0.55+0.4*(+w.dataset.d)):0);});
+  const beam=p(t,vz-0.3,vz+0.4);$('bBeam').style.opacity=beam*(0.85+0.15*Math.sin(t*5));
+  $('bRays').style.opacity=0.3+beam*0.7;$('bRays').style.transform=`rotate(${t*5}deg)`;
+  $('bCity').style.transform=`translateY(${lerp(80,0,eo(p(t,a,a+1.2)))}px)`;
+  $('bCam').style.transform+=` translateY(${shake(t,W('s2','omega')+0.12,6)}px)`;
+};
+R.C=t=>{
+  const k=[W('s3','louvor'),W('s3','palavra'),W('s3','transformação')];
+  rise($('cNoite'),p(t,W('s3',0)-0.15,W('s3',0)+0.3),16,6);
+  ['cW1','cW2','cW3'].forEach((id,i)=>{const q=p(t,k[i]-0.1,k[i]+0.22);slam($(id),q,i===2?1.9:1.5);
+    const nxt=i<2?p(t,k[i+1]-0.1,k[i+1]+0.2):0;$(id).style.opacity*=1-nxt*0.6;});
+  $('cCam').style.transform=`translateY(${lerp(80,-40,eio(p(t,9.05,12.85)))}px) scale(${lerp(1.06,1,p(t,9.05,12.85))}) translateX(${shake(t,k[2]+0.15,7)}px)`;
+  $('cRays').style.transform=`rotate(${-t*7}deg)`;
+};
+R.D=t=>{
+  const r=W('s4','restauradas'), f=W('s4','famílias');
+  rise($('dV'),p(t,12.95,13.3),24,8);
+  const rq=p(t,r-0.08,r+0.25);$('dRest').style.opacity=rq;$('dRest').style.transform=`scale(${lerp(1.6,1,eo5(rq))})`;$('dRest').style.filter=`blur(${(1-rq)*10}px)`;
+  $('dShine').style.left=lerp(-120,440,eio(p(t,r+0.1,r+0.8)))+'px';
+  const fq=p(t,f-0.1,f+0.25);slam($('dF'),fq,1.6);
+  $('dV').style.opacity*=1-p(t,f-0.2,f+0.1)*0.55;
+  $('dV').style.transform+=` translateY(${-eo(p(t,f-0.2,f+0.3))*160}px)`;
+  const h=p(t,f-0.1,W('s4','alcançadas')+0.4);
+  $('dHalo').style.opacity=eo(h)*(0.9+0.1*Math.sin(t*6));$('dHalo').style.transform=`scale(${lerp(0.4,1.15,eo(h))})`;
+  $('dFam').style.opacity=p(t,f-0.3,f+0.2);$('dFam').style.transform=`translateY(${lerp(60,0,eo(p(t,f-0.3,f+0.5)))}px)`;
+  $('dRays').style.opacity=h;$('dRays').style.transform=`rotate(${t*6}deg)`;
+  $('dCam').style.transform=`scale(${lerp(1.05,1,p(t,12.85,16.65))}) translateY(${shake(t,f+0.12,6)}px)`;
+};
+R.E=t=>{
+  const b=W('s5','bairro'),o=W('s5','omega'),pa=W('s5','para'),c=W('s5','cristo');
+  slam($('eB'),p(t,b-0.08,b+0.2),1.6);slam($('eO'),p(t,o-0.08,o+0.22),2.4);
+  rise($('eP'),p(t,pa-0.08,pa+0.2),14,6);slam($('eC'),p(t,c-0.08,c+0.22),2);
+  $('eLaurel').querySelectorAll('.stem').forEach(s=>{const L=s.getTotalLength();s.style.strokeDasharray=L;s.style.strokeDashoffset=L*(1-eio(p(t,16.75,17.5)));});
+  $('eLaurel').querySelectorAll('.lf').forEach(l=>{const i=+l.dataset.i;const q=eo(p(t,16.8+i*0.08,17.1+i*0.08));l.style.opacity=q;});
+  const fq=bk(p(t,c-0.1,c+0.35));$('eFlame').style.transform=`scale(${Math.max(0,fq)*(1+0.04*Math.sin(t*14))})`;$('eFlame').style.filter=`drop-shadow(0 0 24px #BFD4FF)`;
+  $('eRays').style.transform=`rotate(${t*9}deg) scale(${lerp(0.8,1.2,p(t,16.65,19.05))})`;
+  let sh=shake(t,o+0.14,9)+shake(t,c+0.14,11);
+  $('eCam').style.transform=`translate(${sh}px,${sh*0.5}px) scale(${lerp(1.12,1,eio(p(t,16.65,19.05)))})`;
+};
+R.F=t=>{
+  const sb=W('s6',0),ci=W('s6','cinco'),dz=W('s6','dezembro'),hr=W('s6','dezenove'),te=W('s6','terreno'),ad=W('s6','ad');
+  rise($('fTop'),p(t,19.1,19.5),10,4);
+  slam($('fSab'),p(t,sb-0.08,sb+0.2),1.6);
+  const dq=p(t,ci-0.08,ci+0.25);$('fDate').style.opacity=dq;$('fDate').style.transform=`translateX(${(1-eo5(dq))*-80}px)`;$('fDate').style.filter=`blur(${(1-dq)*8}px)`;
+  $('fDate').lastElementChild.style.opacity=p(t,dz-0.1,dz+0.15);
+  $('fLine').style.width=lerp(0,460,eio(p(t,dz,dz+0.6)))+'px';
+  slam($('fHour'),p(t,hr-0.1,hr+0.22),1.5);$('fHand').style.transform=`rotate(${lerp(-360,0,eo(p(t,hr-0.1,hr+0.8)))}deg)`;$('fHand').style.transformOrigin='29px 29px';
+  rise($('fLoc'),p(t,te-0.15,te+0.25),30,8);rise($('fChurch'),p(t,ad-0.2,ad+0.25),30,8);
+  $('fCam').style.transform=`translateY(${lerp(30,-10,eio(p(t,19.05,24.75)))}px) scale(${lerp(1.04,1,p(t,19.05,24.75))})`;
+};
+R.G=t=>{
+  const v=W('s7','venha'),fa=W('s7','traga'),so=W('s7','só'),cr=W('s7','cristo');
+  slam($('gVenha'),p(t,v-0.08,v+0.22),2);rise($('gFam'),p(t,fa-0.1,fa+0.3),14,6);
+  const lq=p(t,24.85,25.6);$('gLogoW').style.opacity=lq;$('gLogoW').style.transform=`scale(${lerp(0.6,1,eo5(lq))}) rotate(${lerp(-25,0,eo5(lq))}deg)`;
+  $('gLGlow').style.opacity=0.6+0.4*Math.sin(t*3);
+  rise($('gSalva'),p(t,so-0.1,so+0.3),20,8);
+  $('gSalva').querySelector('.hl').style.transform=`scale(${t<cr-0.08?0.001:lerp(1.5,1,eo5(p(t,cr-0.08,cr+0.18)))})`;
+  rise($('gInfo'),p(t,28.4,28.9),14,4);
+  $('gRays').style.transform=`rotate(${t*7}deg)`;
+  $('gCam').style.transform=`scale(${lerp(1.06,1,p(t,24.75,30))}) translateY(${shake(t,cr+0.1,7)}px)`;
+};
+function parts(t){$('parts').querySelectorAll('div').forEach(e=>{const sp=+e.dataset.sp;const y=960-((t*sp+(+e.dataset.ph)*1000)%1000);
+  e.style.left=(+e.dataset.x+Math.sin(t*0.8+(+e.dataset.ph)*9)*14)+'px';e.style.top=y+'px';e.style.opacity=t<1.8?0:0.35+0.35*Math.sin(t*2+(+e.dataset.ph)*20);});}
+function render(t){
+  for(const [id,a,b] of S){const vis=t>=a&&t<b;$(id).style.display=vis?'block':'none';if(vis){R[id](t);
+    const o=1-p(t,b-0.12,b)*0.0; $(id).style.opacity=(id==='G')?1-p(t,29.6,30):1;}}
+  let f=0;for(const b of FLASH){if(t>b-0.18&&t<b+0.45)f=Math.max(f,t<b?ei(p(t,b-0.18,b)):1-eo(p(t,b,b+0.45)));}
+  $('flash').style.opacity=f;$('flash').style.transform=`scale(${1+f*0.6})`;
+  parts(t);
+}
+window.render=render;
+</script></body></html>
