@@ -152,6 +152,26 @@ def mat_uniforme(nome, cor1, cor2=None, padrao="liso", freq=9.0,
         rgb = nt.nodes.new("ShaderNodeRGB")
         rgb.outputs[0].default_value = (*cor1, 1)
         cor_atual = rgb.outputs[0]
+    elif padrao == "faixa":
+        # faixa diagonal do ombro direito ao quadril esquerdo
+        mx = nt.nodes.new("ShaderNodeMath"); mx.operation = "MULTIPLY"
+        mx.inputs[1].default_value = 0.85
+        nt.links.new(sep.outputs["X"], mx.inputs[0])
+        mz = nt.nodes.new("ShaderNodeMath"); mz.operation = "MULTIPLY"
+        mz.inputs[1].default_value = -0.75
+        nt.links.new(sep.outputs["Z"], mz.inputs[0])
+        soma = nt.nodes.new("ShaderNodeMath"); soma.operation = "ADD"
+        nt.links.new(mx.outputs[0], soma.inputs[0]); nt.links.new(mz.outputs[0], soma.inputs[1])
+        ab = nt.nodes.new("ShaderNodeMath"); ab.operation = "ABSOLUTE"
+        nt.links.new(soma.outputs[0], ab.inputs[0])
+        lt = nt.nodes.new("ShaderNodeMath"); lt.operation = "LESS_THAN"
+        lt.inputs[1].default_value = 0.2
+        nt.links.new(ab.outputs[0], lt.inputs[0])
+        _, fac, a, b, out = _mix_rgba(nt)
+        a.default_value = (*cor1, 1)
+        b.default_value = (*cor2, 1)
+        nt.links.new(lt.outputs[0], fac)
+        cor_atual = out
     else:
         eixo = sep.outputs["X"] if padrao == "vertical" else sep.outputs["Z"]
         mul = nt.nodes.new("ShaderNodeMath"); mul.operation = "MULTIPLY"
@@ -206,8 +226,13 @@ def _finalizar(obj, mat, contorno=0.018, pai=None, suave=True):
         for p in obj.data.polygons:
             p.use_smooth = True
     if pai is not None:
-        obj.parent = pai
+        _parentear(obj, pai)
     return obj
+
+
+def _parentear(obj, pai):
+    obj.parent = pai
+    obj.matrix_parent_inverse = pai.matrix_world.inverted()
 
 
 def esfera(nome, loc, raio, mat, escala=(1, 1, 1), contorno=0.018, pai=None, seg=48):
@@ -259,7 +284,7 @@ def tubo_curva(nome, pontos, raio, mat, pai=None):
     bpy.context.collection.objects.link(o)
     o.data.materials.append(mat)
     if pai is not None:
-        o.parent = pai
+        _parentear(o, pai)
     return o
 
 
@@ -381,6 +406,9 @@ def cabelo(c, r, estilo, cor, pai):
         dz = v.co.z / R
         franja = 0.38 if estilo != "topete" else 0.48
         limite = franja * max(0.0, -dy) - 0.35 * max(0.0, dy) + 0.05
+        if estilo == "longo":
+            # desce até a altura do queixo nas laterais e atrás
+            limite = 0.42 * max(0.0, -dy) - 0.75 * max(0.0, dy) - 0.35 * abs(v.co.x / R)
         # franja recortada em "dentinhos" na frente
         if dy < -0.3:
             ang = math.atan2(v.co.x, -v.co.y)
@@ -390,6 +418,8 @@ def cabelo(c, r, estilo, cor, pai):
     bmesh.ops.delete(bm, geom=apagar, context="VERTS")
     bm.to_mesh(o.data); bm.free()
     o.scale = (1.0, 1.0, 1.02 if estilo != "topete" else 1.12)
+    if estilo == "longo":
+        o.scale = (1.07, 1.07, 1.03)
     sol = o.modifiers.new("espessura", "SOLIDIFY")
     sol.thickness = 0.06 * r
     _finalizar(o, mat, 0.016, pai)
@@ -409,6 +439,15 @@ PRESETS = {
     "jogador_liso": dict(pele="clara", cabelo="topete", cor_cabelo="castanho",
                          uniforme=dict(cor1=hexcor("#F4F4F4"), padrao="liso",
                                        cor_calcao=hexcor("#111111"))),
+    "vasco": dict(pele="morena", cabelo="liso", cor_cabelo="preto",
+                  uniforme=dict(cor1=hexcor("#141414"), cor2=hexcor("#F4F4F4"), padrao="faixa",
+                                cor_calcao=hexcor("#141414"))),
+    "inter": dict(pele="clara", cabelo="liso", cor_cabelo="castanho",
+                  uniforme=dict(cor1=hexcor("#D0102A"), padrao="liso",
+                                cor_calcao=hexcor("#F4F4F4"))),
+    "goleiro_inter": dict(pele="clara", cabelo="liso", cor_cabelo="castanho",
+                          uniforme=dict(cor1=hexcor("#F2D21B"), padrao="liso",
+                                        cor_calcao=hexcor("#F2D21B"))),
     "arbitro": dict(pele="clara", cabelo="liso", cor_cabelo="preto",
                     uniforme=dict(cor1=hexcor("#1A1A1A"), padrao="liso",
                                   cor_calcao=hexcor("#1A1A1A")),
@@ -446,11 +485,24 @@ def criar_personagem(nome="p", x=0.0, y=0.0, preset="jogador_liso", expressao="n
                              uni.get("padrao", "liso"), uni.get("freq", 9),
                              uni.get("cor_calcao"), uni.get("corte_calcao", -0.42))
 
+    def junta(nome_j, loc):
+        e = bpy.data.objects.new(f"{nome}_{nome_j}", None)
+        bpy.context.collection.objects.link(e)
+        e.location = loc
+        e.parent = raiz
+        bpy.context.view_layer.update()
+        return e
+
+    quadril = {1: junta("quadril_d", (0.17, 0, 0.95)), -1: junta("quadril_e", (-0.17, 0, 0.95))}
+    ombro = {1: junta("ombro_d", (0.45, 0, 1.62)), -1: junta("ombro_e", (-0.45, 0, 1.62))}
+    raiz["juntas"] = {"quadril_d": quadril[1].name, "quadril_e": quadril[-1].name,
+                      "ombro_d": ombro[1].name, "ombro_e": ombro[-1].name}
+
     # pernas de palito + chuteiras
     for lado in (-1, 1):
-        bastao("perna", (lado * 0.17, 0, 0.12), (lado * 0.17, 0, 0.95), 0.045, preto, pai=raiz)
+        bastao("perna", (lado * 0.17, 0, 0.12), (lado * 0.17, 0, 0.95), 0.045, preto, pai=quadril[lado])
         esfera("chuteira", (lado * 0.19, -0.06, 0.08), 0.1, preto,
-               escala=(0.85, 1.4, 0.6), contorno=0, pai=raiz, seg=16)
+               escala=(0.85, 1.4, 0.6), contorno=0, pai=quadril[lado], seg=16)
     # corpo em cápsula
     corpo = esfera("corpo", (0, 0, 1.4), 1.0, mat_corpo, escala=(0.52, 0.42, 0.62),
                    contorno=0.025, pai=raiz)
@@ -465,8 +517,10 @@ def criar_personagem(nome="p", x=0.0, y=0.0, preset="jogador_liso", expressao="n
     if "prancheta" in acess:
         mao_d = (0.35, -0.55, 1.35)
         mao_e = (-0.25, -0.55, 1.45)
-    bastao("braco_d", (0.45, 0, 1.62), mao_d, 0.04, preto, pai=raiz)
-    bastao("braco_e", (-0.45, 0, 1.62), mao_e, 0.04, preto, pai=raiz)
+    mao_d = cfg.get("mao_d", mao_d)
+    mao_e = cfg.get("mao_e", mao_e)
+    bastao("braco_d", (0.45, 0, 1.62), mao_d, 0.04, preto, pai=ombro[1])
+    bastao("braco_e", (-0.45, 0, 1.62), mao_e, 0.04, preto, pai=ombro[-1])
 
     # cabeça
     rc = 0.8
@@ -484,7 +538,7 @@ def criar_personagem(nome="p", x=0.0, y=0.0, preset="jogador_liso", expressao="n
                contorno=0.01, pai=raiz)
     if "cartao_vermelho" in acess:
         caixa("cartao", (mao_d[0] + 0.05, mao_d[1] - 0.02, mao_d[2] + 0.22),
-              (0.2, 0.02, 0.3), mat_toon("cartao", hexcor("#E01E1E"), 0.3), pai=raiz)
+              (0.2, 0.02, 0.3), mat_toon("cartao", hexcor("#E01E1E"), 0.3), pai=ombro[1])
     if "radinho" in acess:
         caixa("radinho", (mao_e[0] + 0.02, mao_e[1], mao_e[2]), (0.14, 0.3, 0.42),
               mat_toon("radio", hexcor("#C9C1A8"), 0.5), pai=raiz)
