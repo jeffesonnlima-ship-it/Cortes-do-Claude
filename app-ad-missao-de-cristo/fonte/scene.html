@@ -1,0 +1,250 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<script src="words.js"></script>
+<style>
+:root{--navy:#0E1F4D;--deep:#071233;--ink:#050C24;--tile:#22315C;--gold:#D3AF59;--gold2:#EBD08F;--page:#F2F5FA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:540px;height:960px;overflow:hidden;background:var(--ink);font-family:'Inter',sans-serif;color:#fff}
+#root{position:absolute;inset:0;overflow:hidden}
+.abs{position:absolute}
+#bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,#1A2E68 0%,#0E1F4D 38%,#071233 70%,#050C24 100%)}
+.ring{position:absolute;border-radius:50%;border:1.5px solid rgba(211,175,89,.22)}
+#parts{position:absolute;inset:0}
+/* headline */
+#head{position:absolute;left:0;right:0;top:64px;height:170px;text-align:center}
+.hl{position:absolute;left:24px;right:24px;top:0}
+.hl .lb{font-size:14px;font-weight:800;letter-spacing:4px;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
+.hl .lb:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.hl .tt{font-family:'Inter Display','Inter';font-weight:800;font-size:42px;letter-spacing:-1.2px;line-height:1.05;margin-top:10px}
+.hl .tt em{font-style:normal;color:var(--gold2)}
+/* phone */
+#phoneWrap{position:absolute;left:0;top:0;width:540px;height:960px}
+#phone{position:absolute;left:0;top:0;width:320px;height:665px;transform-origin:0 0;border-radius:48px;background:linear-gradient(145deg,#2a2f3d,#0b0d14);
+  box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 2px #3a4152,inset 0 0 0 2px #000}
+#screen{position:absolute;left:10px;top:10px;width:300px;height:645px;border-radius:38px;overflow:hidden;background:var(--page)}
+#sbar{position:absolute;left:0;top:0;width:300px;height:22px;display:flex;align-items:center;justify-content:space-between;padding:4px 26px 0;font-size:11px;font-weight:700;color:#111;z-index:3}
+#notch{position:absolute;left:115px;top:6px;width:70px;height:18px;border-radius:10px;background:#000;z-index:4}
+.shot{position:absolute;left:0;top:22px;width:300px;height:623px}
+#spot{position:absolute;border-radius:16px;border:3px solid #D3AF59;box-shadow:0 0 26px 6px rgba(211,175,89,.55);pointer-events:none;z-index:5}
+#mask{position:absolute;left:0;top:0;z-index:4;pointer-events:none}
+#tap{position:absolute;width:16px;height:16px;margin:-8px;border-radius:50%;background:rgba(211,175,89,.75);z-index:6}
+#glare{position:absolute;inset:0;border-radius:38px;background:linear-gradient(115deg,rgba(255,255,255,.18) 0%,transparent 30%);pointer-events:none;z-index:7}
+/* badges */
+.badge{position:absolute;white-space:nowrap;border-radius:999px;padding:10px 18px;font-weight:800;font-size:16px;letter-spacing:.5px;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.bg-gold{background:var(--gold);color:var(--ink)}.bg-navy{background:var(--navy);color:#fff;border:1.5px solid rgba(211,175,89,.6)}
+.card{position:absolute;border-radius:22px;background:rgba(14,31,77,.92);border:1.5px solid rgba(211,175,89,.45);box-shadow:0 24px 60px rgba(0,0,0,.5);backdrop-filter:blur(6px)}
+#flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,240,205,.9),rgba(211,175,89,.25) 45%,transparent 75%);opacity:0;pointer-events:none}
+.vign{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 50%,rgba(2,6,20,.7) 100%);pointer-events:none}
+</style></head>
+<body><div id="root">
+<div id="bg"></div>
+<div id="rings"></div>
+<div id="parts"></div>
+
+<!-- intro -->
+<div id="intro" class="abs" style="inset:0">
+  <div id="iLogoW" class="abs" style="left:170px;top:250px;width:200px;height:200px">
+    <div id="iHalo" class="abs" style="inset:-70px;border-radius:50%;background:radial-gradient(circle,rgba(211,175,89,.5),transparent 65%)"></div>
+    <img src="logo.png" class="abs" style="inset:0;width:200px;height:200px;border-radius:50%;box-shadow:0 0 0 5px #D3AF59,0 20px 50px rgba(0,0,0,.6)">
+  </div>
+  <div id="iPaz" class="abs" style="left:0;right:0;top:500px;text-align:center">
+    <div class="lb" style="font-size:16px;font-weight:800;letter-spacing:5px;color:var(--gold)">A PAZ DO SENHOR,</div>
+    <div style="font-family:'Inter Display','Inter';font-weight:900;font-size:78px;letter-spacing:-2px;margin-top:4px">igreja!</div>
+  </div>
+</div>
+
+
+<div id="phoneWrap"><div id="phone">
+  <div id="screen">
+    <div id="sbar"><span>19:30</span><span style="display:flex;gap:4px;align-items:center">
+      <svg width="16" height="10" viewBox="0 0 16 10"><rect x="0" y="6" width="3" height="4" rx="1" fill="#111"/><rect x="4.5" y="4" width="3" height="6" rx="1" fill="#111"/><rect x="9" y="2" width="3" height="8" rx="1" fill="#111"/><rect x="13" y="0" width="3" height="10" rx="1" fill="#111"/></svg>
+      <svg width="22" height="11" viewBox="0 0 22 11"><rect x=".5" y=".5" width="18" height="10" rx="3" fill="none" stroke="#111"/><rect x="2" y="2" width="13" height="7" rx="1.5" fill="#111"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="#111"/></svg></span></div>
+    <div id="notch"></div>
+    <img id="sh1" class="shot" src="img/c1.png"><img id="sh2" class="shot" src="img/c2.png"><img id="sh3" class="shot" src="img/c3.png"><img id="sh4" class="shot" src="img/c4.png"><img id="sh5" class="shot" src="img/c5.png">
+    <svg id="mask" width="300" height="645" viewBox="0 0 300 645"><path id="maskP" fill="rgba(5,12,36,.62)" fill-rule="evenodd" d=""/></svg><div id="spot"></div>
+    <div id="tap"></div>
+    <div id="glare"></div>
+  </div>
+</div></div>
+
+<div id="headBg" class="abs" style="left:0;right:0;top:0;height:290px;background:linear-gradient(180deg,#050C24 0%,rgba(7,18,51,.96) 62%,rgba(7,18,51,0) 100%);pointer-events:none"></div>
+<div id="head"></div>
+<!-- floating extras -->
+<div id="bPix" class="badge bg-gold">PIX</div>
+<div id="bBreve" class="badge bg-gold" style="display:flex;align-items:center;gap:8px"><svg width="20" height="14" viewBox="0 0 20 14"><rect width="20" height="14" rx="4" fill="#050C24"/><path d="M8 4 L13 7 L8 10Z" fill="#D3AF59"/></svg>EM BREVE · YouTube</div>
+<div id="bMesmas" class="badge bg-navy" style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#D3AF59"/><path d="M5 9.5 L8 12 L13 6" fill="none" stroke="#050C24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Mesmas funções</div>
+<div id="bNovid" class="badge bg-gold" style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 1 L14.5 9.5 L23 12 L14.5 14.5 L12 23 L9.5 14.5 L1 12 L9.5 9.5Z" fill="#050C24"/></svg>Novidades</div>
+<div id="cWeek" class="card" style="left:300px;top:610px;width:220px;padding:14px 16px">
+  <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;color:var(--gold);letter-spacing:1px"><svg id="cRef" width="18" height="18" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="#D3AF59" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>TODA SEMANA</div>
+  <div id="cDays" style="display:flex;gap:5px;margin-top:10px"></div>
+</div>
+<div id="cTimer" class="card" style="left:338px;top:560px;width:170px;height:170px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column">
+  <svg class="abs" style="left:0;top:0" width="170" height="170" viewBox="0 0 170 170"><circle cx="85" cy="85" r="70" fill="none" stroke="rgba(211,175,89,.2)" stroke-width="10"/><circle id="tRing" cx="85" cy="85" r="70" fill="none" stroke="#D3AF59" stroke-width="10" stroke-linecap="round" transform="rotate(-90 85 85)"/></svg>
+  <div id="tNum" style="font-family:'Inter Display','Inter';font-weight:900;font-size:58px;letter-spacing:-2px;line-height:1">30</div>
+  <div style="font-size:12px;font-weight:800;letter-spacing:3px;color:var(--gold2)">SEGUNDOS</div>
+</div>
+<div id="bWpp" class="badge bg-gold" style="display:flex;align-items:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z" fill="#050C24"/><path d="M8.5 7.5c.3-.6.6-.6 1-.6.3 0 .5 0 .7.5l.9 2c.1.3 0 .5-.2.7l-.6.7c.6 1.2 1.6 2.2 2.8 2.8l.7-.6c.2-.2.4-.3.7-.2l2 .9c.5.2.5.4.5.7 0 .4 0 .7-.6 1-1 .6-2.5.6-4.6-.9a10 10 0 0 1-3.3-3.6c-.9-1.7-.5-2.9 0-3.4Z" fill="#D3AF59"/></svg>Grupo do WhatsApp</div>
+
+<!-- outro -->
+<div id="outro" class="abs" style="inset:0">
+  <div id="oT" class="abs" style="left:0;right:0;top:170px;text-align:center">
+    <div class="lb" style="font-size:15px;font-weight:800;letter-spacing:5px;color:var(--gold)">NÃO FIQUE DE FORA</div>
+    <div style="font-family:'Inter Display','Inter';font-weight:900;font-size:56px;letter-spacing:-1.6px;line-height:1.02;margin-top:10px">Atualize o seu<br><span style="color:var(--gold2)">aplicativo</span></div>
+  </div>
+  <div id="oBtn" class="abs" style="left:110px;top:410px;width:320px;height:74px;border-radius:22px;background:var(--gold);color:var(--ink);font-weight:900;font-size:24px;display:flex;align-items:center;justify-content:center;gap:12px;overflow:hidden;box-shadow:0 20px 50px rgba(211,175,89,.35)">
+    <div id="oFill" class="abs" style="left:0;top:0;bottom:0;width:0;background:#EBD08F"></div>
+    <svg id="oIc" style="position:relative" width="26" height="26" viewBox="0 0 24 24"><path d="M12 3v12M6 10l6 6 6-6M4 21h16" fill="none" stroke="#050C24" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span id="oTxt" style="position:relative">Atualizar agora</span>
+  </div>
+  <div id="oTap" class="abs" style="left:270px;top:447px;width:14px;height:14px;margin:-7px;border-radius:50%;border:3px solid #fff"></div>
+  <div id="oEnd" class="abs" style="left:0;right:0;top:560px;text-align:center">
+    <img src="logo.png" style="width:120px;height:120px;border-radius:50%;box-shadow:0 0 0 4px #D3AF59,0 0 50px rgba(211,175,89,.45)">
+    <div style="font-family:'Inter Display','Inter';font-weight:900;font-size:52px;letter-spacing:-1.5px;margin-top:18px">Deus <span style="color:var(--gold2)">abençoe!</span></div>
+    <div style="font-size:14px;font-weight:700;letter-spacing:3px;color:#AEB9D6;margin-top:8px;text-transform:uppercase">AD Missão de Cristo · São Gonçalo do Amarante</div>
+  </div>
+</div>
+<div id="flash"></div>
+<div class="vign"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const p=(t,a,b)=>cl((t-a)/(b-a));
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, eo=x=>1-Math.pow(1-x,3), eo5=x=>1-Math.pow(1-x,5), ei=x=>x*x*x;
+const bk=x=>{const c1=1.6,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+const lerp=(a,b,x)=>a+(b-a)*x;
+function W(pref,after=0){const w=WD.find(w=>w[0]>=after&&w[2].toLowerCase().replace(/[^a-z0-9à-ú]/g,'').startsWith(pref));return w?w[0]:after;}
+const T={paz:W('paz'),igreja:W('igreja'),app:W('aplicativo'),cara:W('cara'),mesmas:W('mesmas'),novid:W('novidades'),tela:W('tela'),biblia:W('bíblia'),pedido:W('pedido'),dizimos:W('dízimos'),pix:W('pix'),breve:W('breve'),cultos:W('cultos',15),youtube:W('youtube'),painel:W('painel'),prog:W('programação'),semana:W('semana'),devoc:W('devocional'),palavra:W('palavra',23),quiz:W('quiz'),n30:W('30'),pergunta:W('pergunta'),comun:W('comunidade'),wpp:W('whatsapp'),acomp:W('acompanha'),atualize:W('atualize'),aplic2:W('aplicativo',34),deus:W('deus'),END:39.0};
+// screen coords from original screenshot coords
+const K=300/720; const sx=x=>x*K, sy=y=>(y-62)*K+22;
+const box=(x0,y0,x1,y1)=>({x:sx(x0)+10,y:sy(y0)+10,w:(x1-x0)*K,h:(y1-y0)*K}); // phone-local
+const center=b=>[b.x+b.w/2,b.y+b.h/2];
+const B={card:box(36,446,684,938),oracao:box(44,976,176,1180),diz:box(211,976,343,1180),culto:box(378,976,510,1180),biblia:box(545,976,677,1180),row:box(36,976,684,1180),
+  chips:box(36,385,605,648),empty:box(36,690,684,868),streak:box(36,386,684,548),days:box(36,590,684,718),devcard:box(36,760,684,1400),
+  pts:box(543,297,684,378),quizcard:box(36,420,684,780),wpp:box(76,521,644,617),famcard:box(36,342,684,657),list:box(36,700,684,1400)};
+const TAB=[85,222,360,498,635];
+// ---------- headlines ----------
+const HL=[[T.cara-0.15,'AD Missão de Cristo','App de <em>cara nova</em>'],[T.tela-0.1,'Tela inicial','Tudo na <em>palma da mão</em>'],
+ [T.biblia-0.1,'Novidade','<em>Bíblia</em> online'],[T.pedido-0.1,'Tela inicial','Pedido de <em>oração</em>'],[T.dizimos-0.1,'Tela inicial','Dízimos e ofertas <em>via PIX</em>'],
+ [T.breve-0.1,'Em breve','Cultos <em>ao vivo</em>'],[T.painel-0.1,'Eventos','Programação <em>toda semana</em>'],[T.devoc-0.1,'Devocional','Uma palavra <em>para cada dia</em>'],
+ [T.quiz-0.1,'Quiz Bíblico','<em>30 segundos</em> por pergunta'],[T.comun-0.1,'Comunidade','Faça parte <em>da família</em>']];
+HL.forEach((h,i)=>{const d=document.createElement('div');d.className='hl';d.id='hl'+i;d.innerHTML=`<div class="lb">${h[1]}</div><div class="tt">${h[2]}</div>`;$('head').appendChild(d);});
+// ---------- camera keyframes: [time reached, dur, scale, focusX, focusY, rotY, rotX] ----------
+const PC=[160,332];
+const CAM=[
+ [0,0,0.9,...PC,28,6],
+ [T.cara+0.4,1.6,0.95,...PC,-10,2],
+ [T.tela,0.8,1.0,...PC,0,0],
+ [T.biblia+0.15,0.6,1.75,...center(B.biblia),0,0],
+ [T.pedido+0.15,0.5,1.75,...center(B.oracao),0,0],
+ [T.dizimos+0.15,0.5,1.75,...center(B.diz),0,0],
+ [T.breve+0.15,0.5,1.75,...center(B.culto),0,0],
+ [T.painel-0.35,0.7,1.0,...PC,0,0],
+ [T.prog+0.2,0.6,1.08,160,300,-6,0],
+ [T.devoc-0.2,0.5,1.0,...PC,0,0],
+ [T.devoc+0.45,0.5,1.45,...center(B.streak),0,0],
+ [T.palavra+0.1,0.6,1.3,160,center(B.devcard)[1]-60,0,0],
+ [T.quiz-0.15,0.5,1.0,...PC,0,0],
+ [T.quiz+0.5,0.5,1.35,...center(B.quizcard),0,0],
+ [T.n30+0.1,0.5,1.05,140,332,-10,0],
+ [T.comun-0.15,0.5,1.0,...PC,0,0],
+ [T.wpp+0.1,0.6,1.5,...center(B.wpp),0,0],
+ [T.acomp+0.2,0.6,1.1,160,380,6,0],
+ [T.atualize+0.2,0.7,0.7,...PC,-18,8]];
+const C=[270,582];
+function cam(t){let st=CAM[0].slice(2);
+  for(let i=1;i<CAM.length;i++){const k=CAM[i];const a=k[0]-k[1];if(t<=a)break;const q=eio(p(t,a,k[0]));const nx=k.slice(2);st=st.map((v,j)=>lerp(v,nx[j],q));}
+  return st;}
+// ---------- spotlights [t0,t1,box] ----------
+const SP=[[T.biblia-0.05,T.pedido-0.15,B.biblia],[T.pedido-0.05,T.dizimos-0.15,B.oracao],[T.dizimos-0.05,T.breve-0.2,B.diz],[T.breve-0.05,T.painel-0.5,B.culto],
+ [T.prog-0.05,T.devoc-0.4,B.chips],[T.devoc+0.4,T.palavra-0.1,B.streak],[T.palavra,T.quiz-0.4,B.devcard],[T.quiz+0.45,T.n30,B.quizcard],[T.wpp-0.05,T.acomp+0.1,B.wpp],[T.acomp+0.2,T.atualize-0.3,B.list]];
+// ---------- screens: [switchTime, index] with tab taps ----------
+const SCR=[[0,1],[T.painel-0.3,2],[T.devoc-0.3,3],[T.quiz-0.3,4],[T.comun-0.3,5]];
+// build days
+['S','T','Q','Q','S','S','D'].forEach(d=>{const e=document.createElement('div');e.style.cssText='flex:1;height:30px;border-radius:9px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#AEB9D6';e.textContent=d;$('cDays').appendChild(e);});
+// rings
+[[270,330,260],[270,330,380],[60,820,220],[500,120,180]].forEach(([x,y,r],i)=>{const e=document.createElement('div');e.className='ring';e.style.cssText+=`left:${x-r}px;top:${y-r}px;width:${2*r}px;height:${2*r}px`;e.dataset.i=i;$('rings').appendChild(e);});
+for(let i=0;i<40;i++){const e=document.createElement('div');e.className='abs';const s=2+((i*13)%4);e.style.cssText=`width:${s}px;height:${s}px;border-radius:50%;background:#EBD08F;box-shadow:0 0 ${s*3}px #D3AF59`;e.dataset.x=(i*97)%540;e.dataset.sp=14+((i*31)%30);e.dataset.ph=(i*.37)%1;$('parts').appendChild(e);}
+$('tRing').style.strokeDasharray=2*Math.PI*70;
+
+function badge(id,t,t0,t1,x,y,rot=0){const e=$(id);const q=bk(p(t,t0,t0+0.35)),o=p(t,t1-0.2,t1);
+  e.style.display=(t>t0&&t<t1)?'flex':'none';e.style.left=x+'px';e.style.top=y+'px';
+  e.style.transform=`scale(${Math.max(0,q)*(1-o*0.3)}) rotate(${rot}deg)`;e.style.opacity=1-o;}
+
+function render(t){
+  // background
+  $('rings').querySelectorAll('.ring').forEach(r=>{const i=+r.dataset.i;r.style.transform=`scale(${1+0.05*Math.sin(t*0.6+i)}) translate(${Math.sin(t*0.3+i)*10}px,${Math.cos(t*0.25+i)*8}px)`;});
+  $('parts').querySelectorAll('div').forEach(e=>{const y=960-((t*(+e.dataset.sp)+(+e.dataset.ph)*1000)%1000);e.style.left=(+e.dataset.x+Math.sin(t+(+e.dataset.ph)*9)*12)+'px';e.style.top=y+'px';e.style.opacity=0.25+0.3*Math.sin(t*2+(+e.dataset.ph)*20);});
+  // intro
+  const io=p(t,T.app-0.5,T.app+0.1);
+  $('intro').style.display=t<T.app+0.2?'block':'none';
+  const lq=bk(p(t,0.05,0.65));$('iLogoW').style.transform=`translateY(${-ei(io)*240}px) scale(${Math.max(0,lq)*lerp(1,0.4,eo(io))})`;$('iLogoW').style.opacity=1-io;
+  $('iHalo').style.opacity=0.7+0.3*Math.sin(t*4);
+  const pq=p(t,T.paz-0.1,T.paz+0.3);$('iPaz').firstElementChild.style.opacity=pq;$('iPaz').firstElementChild.style.letterSpacing=lerp(12,5,eo(pq))+'px';
+  const gq=p(t,T.igreja-0.08,T.igreja+0.18);const ig=$('iPaz').lastElementChild;ig.style.opacity=gq;ig.style.transform=`scale(${lerp(1.6,1,eo5(gq))})`;ig.style.filter=`blur(${(1-gq)*8}px)`;
+  $('iPaz').style.opacity=1-io;$('iPaz').style.transform=`translateY(${io*60}px)`;
+  // headlines
+  HL.forEach((h,i)=>{const e=$('hl'+i);const t0=h[0],t1=i<HL.length-1?HL[i+1][0]:T.atualize-0.2;
+    const q=p(t,t0,t0+0.35),o=p(t,t1-0.05,t1+0.2);const vis=t>=t0&&t<t1+0.2;e.style.display=vis?'block':'none';
+    if(vis){e.style.opacity=q*(1-o);e.style.transform=`translateY(${(1-eo(q))*24-o*18}px)`;e.style.filter=`blur(${(1-q)*6+o*6}px)`;}});
+  // phone
+  const ph=$('phone');
+  $('headBg').style.opacity=p(t,T.cara-0.4,T.cara)*(1-p(t,T.atualize-0.3,T.atualize));
+  const enter=eo5(p(t,T.app-0.3,T.app+0.9));
+  const out=eio(p(t,T.atualize-0.1,T.atualize+0.6));
+  let [s,fx,fy,ry,rx]=cam(t);
+  const Tx=C[0]-s*fx, Ty=C[1]-s*fy+(1-enter)*700+out*420;
+  ph.style.transform=`translate(${Tx}px,${Ty}px) scale(${s})`;
+  $('phoneWrap').style.transform=(Math.abs(ry)<0.05&&Math.abs(rx)<0.05)?'none':`perspective(1400px) rotateY(${ry}deg) rotateX(${rx}deg)`;
+  $('phoneWrap').style.transformOrigin=`${C[0]}px ${C[1]}px`;
+  $('phoneWrap').style.opacity=t<T.app-0.3?0:1-out*0.85;$('phoneWrap').style.filter=`blur(${out*5}px)`;
+  // screens
+  let cur=1,prev=1,sw=-10;for(const [ts,i] of SCR){if(t>=ts){prev=cur;cur=i;sw=ts;}}
+  const sq=eio(p(t,sw,sw+0.4));
+  for(let i=1;i<=5;i++){const e=$('sh'+i);if(i===cur){e.style.display='block';e.style.transform=`translateX(${(1-sq)*300}px)`;e.style.zIndex=2;}
+    else if(i===prev&&sq<1){e.style.display='block';e.style.transform=`translateX(${-sq*90}px)`;e.style.filter=`brightness(${1-sq*0.3})`;e.style.zIndex=1;}
+    else e.style.display='none';}
+  // tap before switch
+  const tp=$('tap');tp.style.display='none';
+  for(const [ts,i] of SCR.slice(1)){const q=p(t,ts-0.3,ts+0.15);if(q>0&&q<1){tp.style.display='block';tp.style.left=sx(TAB[i-1])+'px';tp.style.top=sy(1475)+'px';tp.style.transform=`scale(${1+q*3})`;tp.style.opacity=1-q;}}
+  // spotlight (screen-local coords = phone-local minus bezel 10)
+  const sp=$('spot');let shown=false;
+  for(const [t0,t1,b] of SP){if(t>t0-0.05&&t<t1+0.25){const q=eo(p(t,t0,t0+0.3)),o=p(t,t1,t1+0.25);shown=true;
+    const pad=lerp(14,4,q);sp.style.left=(b.x-10-pad)+'px';sp.style.top=(b.y-10-pad)+'px';sp.style.width=(b.w+pad*2)+'px';sp.style.height=(b.h+pad*2)+'px';
+    sp.style.opacity=q*(1-o);
+    const x=b.x-10-pad,y=b.y-10-pad,w=b.w+pad*2,h=b.h+pad*2,r=16;
+    $('maskP').setAttribute('d',`M0 0H300V645H0Z M${x+r} ${y}H${x+w-r}A${r} ${r} 0 0 1 ${x+w} ${y+r}V${y+h-r}A${r} ${r} 0 0 1 ${x+w-r} ${y+h}H${x+r}A${r} ${r} 0 0 1 ${x} ${y+h-r}V${y+r}A${r} ${r} 0 0 1 ${x+r} ${y}Z`);
+    $('mask').style.opacity=q*(1-o);}}
+  sp.style.display=shown?'block':'none';$('mask').style.display=shown?'block':'none';
+  // floating extras (absolute coords = phone transform applied)
+  const P=(lx,ly)=>[Tx+s*lx,Ty+s*ly];
+  let [bx,by]=P(center(B.diz)[0],B.diz.y);badge('bPix',t,T.pix-0.1,T.breve-0.2,bx-36,by-58,-6);
+  [bx,by]=P(center(B.culto)[0],B.culto.y);badge('bBreve',t,T.breve+0.1,T.painel-0.4,Math.min(bx-110,300),by-64,-3);
+  badge('bMesmas',t,T.mesmas-0.1,T.tela-0.2,30,560,-5);badge('bNovid',t,T.novid-0.1,T.tela-0.2,350,470,6);
+  [bx,by]=P(B.wpp.x+B.wpp.w/2,B.wpp.y);badge('bWpp',t,T.wpp+0.15,T.acomp,bx-120,by-70,-3);
+  // week card
+  const wq=eo5(p(t,T.prog-0.05,T.prog+0.45)),wo=p(t,T.devoc-0.5,T.devoc-0.2);$('cWeek').style.display=t>T.prog-0.1&&t<T.devoc-0.2?'block':'none';
+  $('cWeek').style.transform=`translateX(${(1-wq)*120}px) rotate(${-4+wq*2}deg) scale(${1-wo*0.2})`;$('cWeek').style.opacity=wq*(1-wo);
+  $('cRef').style.transform=`rotate(${t*240}deg)`;
+  $('cDays').querySelectorAll('div').forEach((d,i)=>{const q=p(t,T.prog+0.3+i*0.12,T.prog+0.4+i*0.12);d.style.background=q>0.5?'#D3AF59':'rgba(255,255,255,.08)';d.style.color=q>0.5?'#050C24':'#AEB9D6';d.style.transform=`scale(${1+0.2*Math.sin(Math.PI*q)})`;});
+  // timer
+  const tq=bk(p(t,T.n30-0.1,T.n30+0.3)),to=p(t,T.comun-0.5,T.comun-0.25);$('cTimer').style.display=t>T.n30-0.1&&t<T.comun-0.25?'flex':'none';
+  $('cTimer').style.transform=`scale(${Math.max(0,tq)*(1-to*0.4)})`;$('cTimer').style.opacity=1-to;
+  const el=cl(t-(T.n30+0.3),0,30);const left=Math.max(0,30-Math.floor(el*2.2));$('tNum').textContent=left;
+  $('tRing').style.strokeDashoffset=2*Math.PI*70*(1-left/30);
+  // outro
+  $('outro').style.display=t>T.atualize-0.2?'block':'none';
+  const oq=p(t,T.atualize-0.1,T.atualize+0.35);$('oT').style.opacity=oq;$('oT').style.transform=`translateY(${(1-eo(oq))*30}px)`;$('oT').style.filter=`blur(${(1-oq)*8}px)`;
+  const bq=bk(p(t,T.aplic2-0.3,T.aplic2+0.1));$('oBtn').style.transform=`scale(${Math.max(0,bq)*(1-0.05*Math.sin(Math.PI*p(t,T.aplic2+0.25,T.aplic2+0.45)))})`;
+  const rp=p(t,T.aplic2+0.25,T.aplic2+0.8);$('oTap').style.transform=`scale(${rp*12})`;$('oTap').style.opacity=rp>0?1-rp:0;
+  const fill=eio(p(t,T.aplic2+0.35,T.deus-0.1));$('oFill').style.width=(fill*320)+'px';
+  const done=t>T.deus-0.1;$('oTxt').textContent=done?'Atualizado!':(fill>0?'Atualizando… '+Math.round(fill*100)+'%':'Atualizar agora');
+  $('oIc').innerHTML=done?'<path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#050C24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>':'<path d="M12 3v12M6 10l6 6 6-6M4 21h16" fill="none" stroke="#050C24" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>';
+  const eq=p(t,T.deus-0.1,T.deus+0.4);$('oEnd').style.opacity=eq;$('oEnd').style.transform=`translateY(${(1-eo(eq))*40}px) scale(${lerp(0.9,1,eo(eq))})`;
+  // flash on screen switches + final
+  let f=0;for(const ts of [T.app,T.deus-0.1]){if(t>ts-0.1&&t<ts+0.4)f=Math.max(f,t<ts?p(t,ts-0.1,ts)*0.6:(1-eo(p(t,ts,ts+0.4)))*0.6);}
+  $('flash').style.opacity=f;
+  $('root').style.opacity=1-p(t,T.END-0.5,T.END);
+}
+window.render=render;
+</script></body></html>
